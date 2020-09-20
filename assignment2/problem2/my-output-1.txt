@@ -1,0 +1,24 @@
+(-3.0, -10.0)
+angles initial:
+ [0.12435499454676072, 2.677945044588987, 0.46364760900080615, 2.896613990462929, 3.141592653589793, 2.9441970937399122]
+P initial:
+ [(-1.0, -8.0), (-0.5, 1.0), (0.5, -1.0), (0.5, 2.0), (0.0, 5.0), (1.0, 5.0)]
+
+[(-1.0, -8.0), (0.5, -1.0), (-0.5, 1.0), (0.5, 2.0), (1.0, 5.0), (0.0, 5.0)]
+
+Final points: [(-0.5, 1.0), (0.5, 2.0), (1.0, 5.0), (0.0, 5.0)]
+Final stack: [(-3.0, -10.0), (-1.0, -8.0), (0.5, -1.0)]
+
+the orientation is 10.0
+The appended value is (-0.5, 1.0)
+the orientation is -3.0
+the popped value is (-0.5, 1.0)
+the orientation is 4.5
+The appended value is (0.5, 2.0)
+the orientation is -1.5
+the popped value is (0.5, 2.0)
+the orientation is 5.5
+The appended value is (1.0, 5.0)
+the orientation is 6.0
+The appended value is (0.0, 5.0)
+[(-3.0, -10.0), (-1.0, -8.0), (0.5, -1.0), (1.0, 5.0), (0.0, 5.0)]
