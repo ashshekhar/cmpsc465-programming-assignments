@@ -1,0 +1,146 @@
+Original: [[7, 3], [4, 1], [1, 5], [5, 3], [4, 6], [5, 6], [2, 4], [1, 2], [3, 7], [1, 6], [7, 6], [4, 5], [2, 1], [3, 6], [1, 7]]
+Reversed order of edges: [[3, 7], [1, 4], [5, 1], [3, 5], [6, 4], [6, 5], [4, 2], [2, 1], [7, 3], [6, 1], [6, 7], [5, 4], [1, 2], [6, 3], [7, 1]]
+Number of vertices in DFS: 7
+Enter explore to explore 1
+Clock: 1
+1
+[1, 0, 0, 0, 0, 0, 0]
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Visit vertex in explore 1
+Vertex j: 2
+Clock: 2
+2
+[1, 1, 0, 0, 0, 0, 0]
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Visit vertex in explore 2
+Postlist: [2]
+Postlist: [2, 1]
+Enter explore to explore 3
+Clock: 5
+5
+[1, 1, 1, 0, 0, 0, 0]
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Visit vertex in explore 3
+Vertex j: 5
+Clock: 6
+6
+[1, 1, 1, 0, 1, 0, 0]
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Visit vertex in explore 5
+Vertex j: 4
+Clock: 7
+7
+[1, 1, 1, 1, 1, 0, 0]
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Visit vertex in explore 4
+Postlist: [2, 1, 4]
+Postlist: [2, 1, 4, 5]
+Postlist: [2, 1, 4, 5, 3]
+Enter explore to explore 6
+Clock: 11
+11
+[1, 1, 1, 1, 1, 1, 0]
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Visit vertex in explore 6
+Postlist: [2, 1, 4, 5, 3, 6]
+Enter explore to explore 7
+Clock: 13
+13
+[1, 1, 1, 1, 1, 1, 1]
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Visit vertex in explore 7
+Postlist: [2, 1, 4, 5, 3, 6, 7]
+Number of vertices: 7
+Number of edges:15
+[[7, 3], [4, 1], [1, 5], [5, 3], [4, 6], [5, 6], [2, 4], [1, 2], [3, 7], [1, 6], [7, 6], [4, 5], [2, 1], [3, 6], [1, 7]]
