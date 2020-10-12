@@ -91,5 +91,6 @@ def main():
   print(f"Number of vertices: {num_vertices}")
   print(f"Number of edges:{num_edges}")
   print(edge_array)
+  print(f"Final postlist: {postlist}")
 
 main()
