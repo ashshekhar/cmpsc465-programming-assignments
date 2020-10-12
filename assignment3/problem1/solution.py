@@ -1,96 +1,80 @@
-clock = 0
-pre = []
-post = []
+timing = 0
+num_cc = 0
+
 postlist = []
 visited = []
 vertex = []
 
-def explore (num_vertices, num_edges, edge_array, i, visit_vertex):
-  global clock
-  count = 0
+magic_visited = []
 
-  print(f"Clock: {clock}")
-  print(clock)
-  pre.append(clock)
+num_vertices = 0
+num_edges = 0
 
-  clock += 1
-  visited[i] = 1
+def DFS(edge_array):
+  global num_vertices
+  global timing
+  timing = 1
 
-  print(visited)
-
-  for edge in edge_array:
-    print(f"Visit vertex in explore {visit_vertex}")
-    if(edge[0] == visit_vertex):
-      vertex_j = edge[1]
-      count += 1
-
-  if (count != 0): 
-    for edge in edge_array:
-      if(visited[vertex.index(vertex_j)] == 0):
-        print(f"Vertex j: {vertex_j}")
-        explore (num_vertices, num_edges, edge_array, vertex.index(vertex_j), vertex_j)
-
-  post.insert(i, clock)
-  clock += 1
-  postlist.append(visit_vertex)
-
-  print(f"Postlist: {postlist}")
-
-  return
-
-
-def DFS(num_vertices, num_edges, edge_array):
-
-  global clock
-  clock = 1
-
-  print(f"Number of vertices in DFS: {num_vertices}")
-  for i in range(num_vertices):
-    vertex.append(i+1) 
-    visited.append(0)
-  
   for i in range(num_vertices):
     if(visited[i] == 0):
-      print(f"Enter explore to explore {vertex[i]}")
-      explore(num_vertices, num_edges, edge_array, i, vertex[i])
+      explore(edge_array, i, vertex[i])
 
-def magic_order(num_vertices, num_edges, edge_array):
 
-  reverse_edge_array = []
-  
+def explore (edge_array, i, visit_vertex):
+  global timing
+  count = 0
+
+  timing += 1
+  visited[i] = 1
+
   for edge in edge_array:
-    orig_u = edge[0]
-    orig_v = edge[1]
-    reverse_edge_array.append([orig_v, orig_u])
+    if(edge[0]==visit_vertex and visited[vertex.index(edge[1])]==0):
+      explore(edge_array, vertex.index(edge[1]), edge[1])
 
-  print(f"Reversed order of edges: {reverse_edge_array}")
+  timing += 1
+  postlist.append(visit_vertex)
 
-  DFS(num_vertices, num_edges, reverse_edge_array)
 
-  return
+def magic_DFS(edge_array):
+  global num_cc
+  num_cc = 0
 
-def main():
+  for vertex in postlist:
+    if(magic_visited[vertex-1] == 0):
+      num_cc += 1
+      magic_explore(edge_array, vertex-1, vertex)
 
-  line_1 = input()
-  line_1 = line_1.strip().split(' ')
-  
-  num_vertices = int(line_1[0])
-  num_edges = int(line_1[1])
 
-  edge_array = []
+def magic_explore(edge_array, i, visit_vertex):
+  magic_visited[i] = num_cc
+  count = 0
 
-  for edge in range(num_edges):
-    edge_input = input()
-    edges = list(map(int, edge_input.strip().split(' ')))
-    edge_array.append(edges)
-  
-  print(f"Original: {edge_array}")
+  for edge in edge_array:
+    if(edge[0] == visit_vertex and magic_visited[edge[1]-1]==0 ):
+       magic_explore(edge_array, edge[1]-1, edge[1])
 
-  magic_order(num_vertices, num_edges, edge_array)
-  
-  print(f"Number of vertices: {num_vertices}")
-  print(f"Number of edges:{num_edges}")
-  print(edge_array)
-  print(f"Final postlist: {postlist}")
+line_1 = input()
+line_1 = line_1.strip().split(' ')
 
-main()
+num_vertices = int(line_1[0])
+num_edges = int(line_1[1])
+
+edge_array = []
+reverse_edge_array = []
+
+for edge in range(num_edges):
+  edge_input = input()
+  edges = list(map(int, edge_input.strip().split(' ')))
+  edge_array.append(edges)
+  reverse_edge_array.append([edges[1],edges[0]])
+
+for i in range(num_vertices):
+  vertex.append(i+1) 
+  visited.append(0)
+  magic_visited.append(0)
+
+DFS(reverse_edge_array)
+postlist.reverse()
+magic_DFS(edge_array)
+
+print(num_cc)
