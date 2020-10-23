@@ -1,7 +1,6 @@
-def Bellman_Ford(edge_array, source_vertex):
+def Bellman_Ford():
 
   dist = [float('inf')] * num_vertices
-  temp = []
   dist[source_vertex-1] = 0
 
   for k in range(1, num_vertices+1):
@@ -15,11 +14,11 @@ def Bellman_Ford(edge_array, source_vertex):
 
           if((dist[u-1] + l) < dist[v-1]):
             dist[v-1] = dist[u-1] + l
-        
-    if(k == num_vertices-1):
-      temp = dist[:]
-    if(k == num_vertices):
-      return (not(temp == dist))
+            if(k == num_vertices):
+              return True
+
+  return False
+
 
 line_1 = input()
 line_1 = line_1.strip().split(' ')
@@ -42,4 +41,4 @@ for edge in range(num_edges):
   if edges[1] not in vertices_array:
     vertices_array.append(edges[1])
 
-print(Bellman_Ford(edge_array, source_vertex))
+print(Bellman_Ford())
