@@ -33,6 +33,5 @@ for edge in range(num_edges):
   edges = list(map(int, edge_input.strip().split(' ')))
   graph[edges[0]] [edges[1]] = edges[2]
 
-
 print(Bellman_Ford())
 
