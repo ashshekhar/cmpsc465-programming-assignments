@@ -1,3 +1,2 @@
-Hello
-Hi
-Hello
+Sorted list by end time: [[2, 4, 2], [8, 10, 6], [9, 10, 2], [6, 11, 3], [10, 12, 4]]
+10
