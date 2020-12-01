@@ -1,357 +1,454 @@
 Sorted list by end time: [[2, 30, 87], [78, 79, 81], [7, 95, 96], [68, 97, 36], [37, 99, 46], [112, 125, 50], [80, 126, 81], [164, 212, 38], [169, 214, 96], [121, 216, 13], [177, 233, 53], [154, 240, 78], [164, 241, 82], [152, 245, 100], [181, 255, 78], [233, 260, 48], [221, 266, 43], [230, 278, 94], [233, 279, 38], [283, 289, 75], [247, 297, 47], [279, 300, 78], [216, 307, 13], [300, 310, 34], [268, 319, 99], [307, 320, 24], [268, 323, 64], [250, 327, 69], [291, 334, 8], [290, 340, 35], [270, 352, 88], [263, 360, 5], [351, 385, 15], [345, 399, 15], [313, 404, 76], [403, 411, 97], [334, 419, 50], [371, 421, 43], [342, 423, 55], [364, 445, 40], [389, 447, 35], [392, 449, 66], [400, 451, 69], [451, 458, 48], [433, 459, 78], [441, 480, 57], [411, 494, 24], [471, 496, 24], [431, 519, 39], [438, 530, 70], [489, 532, 32], [497, 536, 72], [471, 570, 75], [552, 577, 69], [492, 582, 12], [526, 583, 81], [500, 584, 85], [534, 594, 7], [502, 600, 23], [568, 601, 44], [591, 620, 11], [590, 639, 99], [604, 640, 96], [620, 656, 42], [643, 656, 29], [634, 663, 78], [605, 664, 79], [633, 676, 90], [672, 690, 31], [621, 690, 15], [655, 696, 4], [630, 702, 63], [703, 792, 13], [746, 795, 39], [710, 810, 15], [776, 811, 32], [794, 837, 29], [778, 838, 36], [799, 842, 6], [805, 865, 99], [797, 867, 89], [803, 867, 54], [869, 901, 89], [896, 910, 79], [828, 911, 29], [893, 912, 15], [877, 935, 85], [898, 935, 84], [921, 937, 30], [929, 946, 67], [881, 951, 92], [923, 1001, 48], [971, 1001, 47], [956, 1023, 17], [948, 1025, 78], [928, 1027, 11], [964, 1038, 16], [950, 1038, 95], [953, 1040, 48], [998, 1068, 8]]
+[[2, 30, 87], [78, 79, 81], [7, 95, 96], [68, 97, 36], [37, 99, 46], [112, 125, 50], [80, 126, 81], [164, 212, 38], [169, 214, 96], [121, 216, 13], [177, 233, 53], [154, 240, 78], [164, 241, 82], [152, 245, 100], [181, 255, 78], [233, 260, 48], [221, 266, 43], [230, 278, 94], [233, 279, 38], [283, 289, 75], [247, 297, 47], [279, 300, 78], [216, 307, 13], [300, 310, 34], [268, 319, 99], [307, 320, 24], [268, 323, 64], [250, 327, 69], [291, 334, 8], [290, 340, 35], [270, 352, 88], [263, 360, 5], [351, 385, 15], [345, 399, 15], [313, 404, 76], [403, 411, 97], [334, 419, 50], [371, 421, 43], [342, 423, 55], [364, 445, 40], [389, 447, 35], [392, 449, 66], [400, 451, 69], [451, 458, 48], [433, 459, 78], [441, 480, 57], [411, 494, 24], [471, 496, 24], [431, 519, 39], [438, 530, 70], [489, 532, 32], [497, 536, 72], [471, 570, 75], [552, 577, 69], [492, 582, 12], [526, 583, 81], [500, 584, 85], [534, 594, 7], [502, 600, 23], [568, 601, 44], [591, 620, 11], [590, 639, 99], [604, 640, 96], [620, 656, 42], [643, 656, 29], [634, 663, 78], [605, 664, 79], [633, 676, 90], [672, 690, 31], [621, 690, 15], [655, 696, 4], [630, 702, 63], [703, 792, 13], [746, 795, 39], [710, 810, 15], [776, 811, 32], [794, 837, 29], [778, 838, 36], [799, 842, 6], [805, 865, 99], [797, 867, 89], [803, 867, 54], [869, 901, 89], [896, 910, 79], [828, 911, 29], [893, 912, 15], [877, 935, 85], [898, 935, 84], [921, 937, 30], [929, 946, 67], [881, 951, 92], [923, 1001, 48], [971, 1001, 47], [956, 1023, 17], [948, 1025, 78], [928, 1027, 11], [964, 1038, 16], [950, 1038, 95], [953, 1040, 48], [998, 1068, 8]]
 Final else
+F[k] = 87
+F[k] = 168
 Second if
+F[k] = 168
 Second if
+First if
+F[k] = 168
 Second if
+First if
+F[k] = 168
 Third if
 Third if
-First if
+F[k] = 218
 Second if
-Second if
 First if
+F[k] = 249
 Third if
 Third if
-First if
+F[k] = 287
 Third if
+Third if
+First if
+F[k] = 345
 First if
+F[k] = 345
+Third if
+Second if
 First if
+F[k] = 345
 Third if
+Second if
 Second if
 First if
+F[k] = 345
 Third if
 Second if
 Second if
 First if
+F[k] = 345
 First if
+F[k] = 349
 First if
+F[k] = 349
+Third if
 Second if
 Third if
 First if
+F[k] = 393
 Third if
 Second if
 First if
+F[k] = 393
 Third if
 Second if
 Second if
 First if
+F[k] = 439
 Third if
 Second if
 Second if
-First if
 First if
+F[k] = 439
 Third if
 Third if
 Third if
 Third if
-First if
+F[k] = 514
 Third if
 Second if
+Third if
 First if
+F[k] = 514
 Third if
 Third if
 First if
+F[k] = 517
 Second if
+Third if
 Third if
 First if
+F[k] = 517
 Third if
 Third if
+Third if
 First if
+F[k] = 551
 Third if
 Second if
 Third if
-Second if
 First if
+F[k] = 551
+Third if
 Third if
 Third if
+Second if
 First if
+F[k] = 551
 Third if
 Second if
 First if
+F[k] = 551
 First if
+F[k] = 551
 Third if
 Second if
 Third if
-Second if
 First if
+F[k] = 551
 Third if
 Second if
 Third if
 Second if
 First if
+F[k] = 551
 Third if
-Second if
 Second if
 Second if
 First if
+F[k] = 551
 First if
+F[k] = 551
 Third if
 Third if
 Third if
-Second if
 First if
+F[k] = 566
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 566
 Third if
 Second if
 Third if
 First if
+F[k] = 627
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 663
+Third if
 Third if
+Second if
+Second if
 First if
+F[k] = 663
 Third if
 Third if
 Second if
 Third if
 First if
+F[k] = 663
 Third if
 Third if
 Second if
 Second if
 Second if
 First if
+F[k] = 663
 Third if
 Third if
 Second if
 Second if
 First if
+F[k] = 663
 Third if
 Third if
-Second if
 Second if
 First if
+F[k] = 663
 Third if
 Third if
 Second if
 Second if
 First if
+F[k] = 663
 Third if
 Third if
 Second if
 Second if
 First if
+F[k] = 663
 Third if
 Third if
 Third if
 Third if
-First if
 Third if
+F[k] = 711
 Third if
+Third if
 First if
+F[k] = 741
 Third if
 Third if
 Second if
 Third if
 First if
+F[k] = 741
+Third if
 Third if
+Second if
+Second if
+Second if
 First if
+F[k] = 741
 Third if
 Third if
 Third if
 First if
+F[k] = 765
 Third if
 Third if
 Second if
-Second if
 First if
+F[k] = 765
 Third if
 Third if
 Second if
 Second if
 First if
+F[k] = 765
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 773
 Third if
 Third if
 Third if
 First if
+F[k] = 837
 Third if
 Third if
 Second if
 Third if
 First if
+F[k] = 837
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 906
 Third if
 Third if
 Second if
 Third if
 Second if
 First if
+F[k] = 906
 Third if
 Third if
 First if
+F[k] = 906
 Third if
 Third if
 Second if
 Third if
-Second if
 First if
+F[k] = 906
 Third if
 Third if
 Third if
 Second if
 Second if
 First if
+F[k] = 906
 Third if
 Third if
 Second if
 First if
+F[k] = 906
 Third if
 Third if
 First if
+F[k] = 906
 Third if
 Third if
 Third if
 First if
+F[k] = 917
 Third if
 Third if
 Third if
 Second if
 Third if
 First if
+F[k] = 1005
 Third if
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 1005
 Third if
 Third if
 Third if
+Third if
+Second if
 First if
+F[k] = 1005
+Third if
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 1034
 Third if
 Third if
 Third if
 First if
+F[k] = 1034
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 1034
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 1034
 Third if
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 1065
 Third if
 Third if
 First if
+F[k] = 1065
 Third if
 Third if
 Third if
 Second if
 Second if
 First if
+F[k] = 1065
 Third if
 Third if
 Second if
 Third if
 First if
+F[k] = 1065
 Third if
 Third if
 Third if
 Third if
 Third if
 Third if
-First if
+F[k] = 1078
 Third if
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 1104
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 1104
 Third if
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 1104
 Third if
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 1107
 Third if
 Third if
 Third if
 Second if
 Third if
 First if
+F[k] = 1107
 Third if
 Third if
 Third if
 First if
+F[k] = 1110
 Third if
 Third if
 Third if
 Second if
 Third if
 First if
+F[k] = 1203
 Third if
 Third if
 Third if
 Second if
+Third if
 First if
+F[k] = 1203
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 1203
 Third if
 Third if
 Third if
 Third if
 Third if
 Third if
-First if
+F[k] = 1292
 Third if
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 1292
 Third if
 Third if
 Third if
 Second if
 Second if
 First if
+F[k] = 1292
 Third if
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 1292
 Third if
 Third if
 Third if
@@ -359,41 +456,49 @@ Third if
 Second if
 Second if
 First if
+F[k] = 1292
 Third if
 Third if
 Third if
 First if
+F[k] = 1292
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 1322
 Third if
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 1359
 Third if
 Third if
 Third if
 Second if
 First if
+F[k] = 1359
 Third if
 Third if
 Third if
 First if
+F[k] = 1359
 Third if
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 1406
 Third if
 Third if
 Third if
 Third if
 First if
+F[k] = 1406
 Third if
 Third if
 Third if
@@ -401,28 +506,36 @@ Third if
 Second if
 Second if
 First if
+F[k] = 1437
 Third if
 Third if
 Third if
 Second if
 Second if
 First if
+F[k] = 1437
 Third if
 Third if
 Third if
+Third if
+Second if
+Second if
 First if
+F[k] = 1437
 Third if
 Third if
 Third if
 Second if
 Third if
 First if
+F[k] = 1454
 Third if
 Third if
 Third if
 Second if
 Third if
 First if
+F[k] = 1454
 Third if
 Third if
 Third if
@@ -430,4 +543,5 @@ Second if
 Third if
 Second if
 First if
-1365
+F[k] = 1454
+1454

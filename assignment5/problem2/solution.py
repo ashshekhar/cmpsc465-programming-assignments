@@ -34,10 +34,13 @@ def union(x, y):
     r_x += 1
 
 
-# def kruskals(interval_list):
+def kruskals(interval_list):
 
-#   for _ in range(num_vertices):
-#     make_set()
+  for item in interval_list:
+    print(item)
+
+  for _ in range(num_vertices):
+    make_set(Node())
 
 
 user_input = input().strip().split(" ")
