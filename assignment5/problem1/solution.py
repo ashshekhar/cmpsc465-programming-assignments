@@ -41,7 +41,3 @@ F = [0]*(num_jobs)
 pre = [0]*(num_jobs)
 
 print(weighted_interval_scheduling(interval_list))
-
-
-  
-
