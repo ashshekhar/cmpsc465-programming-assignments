@@ -4,31 +4,31 @@ class Node:
     self.parent = self
     self.height = height
 
-def make_set(self):
-  self.height = 1
-  self.parent = self
+  def make_set(self):
+    self.height = 1
+    self.parent = self
 
-def find(self):
-  while(self.parent != self):
-    self = self.parent
-  return self
+  def find(self):
+    while(self.parent != self):
+      self = self.parent
+    return self
 
-def union(self, other):
-  r_x = find(self)
-  r_y = find(other)
+  def union(self, other):
+    r_x = Node.find(self)
+    r_y = Node.find(other)
 
-  if r_x == r_y:
-    return
-  
-  if(r_x.height > r_y.height):
-    r_y.parent = r_x
+    if r_x == r_y:
+      return
+    
+    if(r_x.height > r_y.height):
+      r_y.parent = r_x
 
-  elif(r_x.height < r_y.height):
-    r_x.parent = r_y
+    elif(r_x.height < r_y.height):
+      r_x.parent = r_y
 
-  else:
-    r_y.parent = r_x
-    r_x += 1
+    else:
+      r_y.parent = r_x
+      r_x.height += 1
 
 
 def Kruskals(edges_list, vertices):
@@ -36,16 +36,24 @@ def Kruskals(edges_list, vertices):
   visited_edges = []
 
   for vertex in vertices:
-    make_set(Node(vertex))
+    v = Node(vertex)
+    Node.make_set(v)
 
   for edge in edges_list:
-    r_u = find(edge[0])
-    r_v = find(edge[1])
+    r_u = Node.find(Node(edge[0]))
+    r_v = Node.find(Node(edge[1]))
 
     if(r_u != r_v):
       visited_edges.append(edge)
-      union(r_u, r_v)
+      print(edge)
+      print(f"Visited edges: {visited_edges}")
+      Node.union(r_u, r_v)
 
+
+  min_cost = 0
+  for edge in visited_edges:
+    min_cost += edge[2]
+  return min_cost
 
 user_input = input().strip().split(" ")
 num_vertices = int(user_input[0])
@@ -62,9 +70,4 @@ for edge in range(num_edges):
 
 edges_list.sort(key=lambda x:x[2])
 list(vertices)
-
-print(num_vertices)
-print(num_edges)
-print(edges_list)
-print(vertices)
 print(Kruskals(edges_list, vertices))
