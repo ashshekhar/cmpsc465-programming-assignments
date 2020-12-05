@@ -34,21 +34,23 @@ class Node:
 def Kruskals(edges_list, vertices):
 
   visited_edges = []
+  vertex_node = []
 
   for vertex in vertices:
     v = Node(vertex)
     Node.make_set(v)
+    vertex_node.append(v)
 
   for edge in edges_list:
-    r_u = Node.find(Node(edge[0]))
-    r_v = Node.find(Node(edge[1]))
+    def condition(x, y): return x.data == edge[y]
+    def find_node(x): return [idx for idx, element in enumerate(vertex_node) if condition(element, x)]
+
+    r_u = Node.find(vertex_node[find_node(0)[0]])
+    r_v = Node.find(vertex_node[find_node(1)[0]])
 
     if(r_u != r_v):
       visited_edges.append(edge)
-      print(edge)
-      print(f"Visited edges: {visited_edges}")
       Node.union(r_u, r_v)
-
 
   min_cost = 0
   for edge in visited_edges:
@@ -66,6 +68,7 @@ for edge in range(num_edges):
   edge_input = input()
   edges = list(map(int, edge_input.strip().split(' ')))
   vertices.add(edges[0])
+  vertices.add(edges[1])
   edges_list.append(edges)
 
 edges_list.sort(key=lambda x:x[2])
