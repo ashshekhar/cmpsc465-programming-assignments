@@ -52,16 +52,16 @@ def Ford_Fulkerson(graph, s, t):
   if len(all_path) == 0:
     return 0
 
-  for path in all_path:
-    capacities = []
-    for initial_vertex, sink_capacity_list in residual_graph.items():
-      for sink, capacity_flow in sink_capacity_list.items():
-         for i in range(len(path)):
-           if(initial_vertex == path[i] and sink == path[i+1]):
+  capacities = []
+  for initial_vertex, sink_capacity_list in residual_graph.items():
+    for sink, capacity_flow in sink_capacity_list.items():
+        for i in range(len(all_path[0])):
+          if(initial_vertex == all_path[0][i] and sink == all_path[0][i+1]):
             capacities.append(capacity_flow)
-    print(f"Capacities: {capacities}")
-    bottle_neck = min(capacities)
-    print(f"Bottleneck: {bottle_neck}")
+  print(f"Capacities: {capacities}")
+  bottleneck = min(capacities)
+  print(f"Bottleneck: {bottleneck}")
+  max_flow += bottleneck
 
 user_input = input().strip().split(" ")
 num_vertices = int(user_input[0])
