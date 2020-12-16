@@ -20,23 +20,6 @@ def BFS(graph, s, t, path, visited, one_path):
   path.pop()
   visited[s-1] = False
 
-def build_residual(graph):
-
-  for initial_vertex, sink_capacity_list in graph.items():
-    for sink, capacity_flow in sink_capacity_list.items():
-      u = initial_vertex
-      v = sink
-      c = capacity_flow[0]
-      f = capacity_flow[1]
-
-      if((c-f) > 0):
-        residual_graph[u][v] = c-f
-
-      if(f>0):
-        residual_graph[v][u] = f
-
-  return residual_graph
-
 def augment(graph, bottleneck, one_path):
 
   for initial_vertex, sink_capacity_list in graph.items():
@@ -67,9 +50,6 @@ def Ford_Fulkerson(graph, s, t):
   print(graph)
 
   print("Residual graph")
-  if(count == 0):
-    build_residual(graph)
-    count += 1
   print(residual_graph)
   print("\n")
 
@@ -86,9 +66,9 @@ def Ford_Fulkerson(graph, s, t):
   capacities = []
   for initial_vertex, sink_capacity_list in residual_graph.items():
     for sink, capacity_flow in sink_capacity_list.items():
-        for i in range(len(one_path[0])-1):
-          if(initial_vertex == one_path[0][i] and sink == one_path[0][i+1]):
-            capacities.append(capacity_flow)
+      for i in range(len(one_path[0])-1):
+        if(initial_vertex == one_path[0][i] and sink == one_path[0][i+1]):
+          capacities.append(capacity_flow)
 
 
   print(f"Capacities: {capacities}")
@@ -116,17 +96,20 @@ for edge in range(num_edges):
 
   if(not bool(graph)):
     graph[edges[0]] [edges[1]] = (edges[2], 0)
+    residual_graph[edges[0]] [edges[1]] = edges[2]
     continue
 
   for initial_vertex, sink_capacity_list in graph.items():
     for sink, capacity_flow in sink_capacity_list.items():
       if(initial_vertex==edges[0] and sink==edges[1]):
         graph[edges[0]][edges[1]] = (edges[2]+capacity_flow[0], capacity_flow[1])
+        residual_graph[edges[0]] [edges[1]] = edges[2]+capacity_flow[0]
         already_present = True
       break
 
   if(already_present == False):
     graph[edges[0]] [edges[1]] = (edges[2], 0)
+    residual_graph[edges[0]] [edges[1]] = edges[2]
 
 Ford_Fulkerson(graph, 1, num_vertices)
 print(max_flow)
