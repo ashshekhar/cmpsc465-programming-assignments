@@ -36,8 +36,28 @@ def build_residual(graph):
 
   return residual_graph
 
+def augment(graph, bottleneck, all_path):
+  for initial_vertex, sink_capacity_list in graph.items():
+    for sink, capacity_flow in sink_capacity_list.items():
+      for i in range(len(all_path[0])-1):
+        if(initial_vertex == all_path[0][i] and sink == all_path[0][i+1]):
+          print(f"Initial capacity flow in FE: {capacity_flow} for source {initial_vertex} and sink {sink}")
+          capacity_flow = list(capacity_flow)
+          capacity_flow[1] += bottleneck
+          capacity_flow = tuple(capacity_flow)
+          print(f"New capacity flow in FE: {capacity_flow} for source {initial_vertex} and sink {sink}")
+
+        elif(sink == all_path[0][i] and initial_vertex == all_path[0][i+1]):
+          print(f"Initial capacity flow in BE: {capacity_flow} for source {initial_vertex} and sink {sink}")
+          capacity_flow = list(capacity_flow)
+          capacity_flow[1] -= bottleneck
+          capacity_flow = tuple(capacity_flow)
+          print(f"New capacity flow in BE: {capacity_flow} for source {initial_vertex} and sink {sink}")
+
+
 def Ford_Fulkerson(graph, s, t):
-  max_flow = 0
+  global max_flow
+
   print("Actual graph")
   print(graph)
   print("Residual graph")
@@ -50,18 +70,21 @@ def Ford_Fulkerson(graph, s, t):
   print(BFS(build_residual(graph), s, t, path, visited, all_path))
 
   if len(all_path) == 0:
-    return 0
+    return max_flow
 
   capacities = []
   for initial_vertex, sink_capacity_list in residual_graph.items():
     for sink, capacity_flow in sink_capacity_list.items():
-        for i in range(len(all_path[0])):
+        for i in range(len(all_path[0])-1):
           if(initial_vertex == all_path[0][i] and sink == all_path[0][i+1]):
             capacities.append(capacity_flow)
+
   print(f"Capacities: {capacities}")
   bottleneck = min(capacities)
   print(f"Bottleneck: {bottleneck}")
   max_flow += bottleneck
+  augment(graph, bottleneck, all_path)
+  #Ford_Fulkerson(graph, 1, num_vertices)
 
 user_input = input().strip().split(" ")
 num_vertices = int(user_input[0])
@@ -70,6 +93,7 @@ num_edges = int(user_input[1])
 graph = defaultdict(dict)
 residual_graph = defaultdict(dict)
 adjacent_set = set()
+max_flow = 0
 
 for edge in range(num_edges):
   edge_input = input()
