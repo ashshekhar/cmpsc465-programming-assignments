@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 def BFS(graph, s, t, path, visited, one_path):
-
+  
   visited[s-1] = True
   path.append(s)
 
@@ -13,7 +13,7 @@ def BFS(graph, s, t, path, visited, one_path):
   else:
     for initial_vertex, sink_capacity_list in graph.items():
       for sink, capacity_flow in sink_capacity_list.items():
-        if(initial_vertex==s):
+        if(initial_vertex==s and capacity_flow!=0):
           if(visited[sink-1]==False):
             BFS(graph, sink, num_vertices, path, visited, one_path)
 
@@ -21,7 +21,7 @@ def BFS(graph, s, t, path, visited, one_path):
   visited[s-1] = False
 
 def build_residual(graph):
-  residual_graph.clear()
+
   for initial_vertex, sink_capacity_list in graph.items():
     for sink, capacity_flow in sink_capacity_list.items():
       u = initial_vertex
@@ -29,45 +29,57 @@ def build_residual(graph):
       c = capacity_flow[0]
       f = capacity_flow[1]
 
-      if((c-f) != 0):
+      if((c-f) > 0):
         residual_graph[u][v] = c-f
 
-      if(f!=0):
+      if(f>0):
         residual_graph[v][u] = f
 
   return residual_graph
 
 def augment(graph, bottleneck, one_path):
+
   for initial_vertex, sink_capacity_list in graph.items():
     for sink, capacity_flow in sink_capacity_list.items():
+      c = capacity_flow[0]
+      f = capacity_flow[1]
+
       for i in range(len(one_path[0])-1):
 
         if(initial_vertex == one_path[0][i] and sink == one_path[0][i+1]):
-          print(f"Initial capacity flow in FE: {capacity_flow} for source {initial_vertex} and sink {sink}")
-          graph[initial_vertex][sink] = (capacity_flow[0], capacity_flow[1]+bottleneck)
-          print(f"New capacity flow in FE: {capacity_flow} for source {initial_vertex} and sink {sink}")
-       
+          graph[initial_vertex][sink] = (c, f+bottleneck)
+          residual_graph[initial_vertex][sink] = c-(f+bottleneck)
+          residual_graph[sink][initial_vertex] = bottleneck
+      
         elif(sink == one_path[0][i] and initial_vertex == one_path[0][i+1]):
-          print(f"Initial capacity flow in BE: {capacity_flow} for source {initial_vertex} and sink {sink}")
-          graph[sink][initial_vertex] = (capacity_flow[0], capacity_flow[1]-bottleneck)
-          print(f"New capacity flow in BE: {capacity_flow} for source {initial_vertex} and sink {sink}")
+          graph[sink][initial_vertex] = (c, f-bottleneck)
+          residual_graph[initial_vertex][sink] = c-(f+bottleneck)
+          residual_graph[sink][initial_vertex] = bottleneck
 
   return graph
 
 
 def Ford_Fulkerson(graph, s, t):
   global max_flow
+  global count
 
   print("Actual graph")
   print(graph)
+
   print("Residual graph")
-  print(build_residual(graph))
+  if(count == 0):
+    build_residual(graph)
+    count += 1
+  print(residual_graph)
+  print("\n")
 
   visited = [False]*(num_vertices)
   path = []
   one_path = []
+  print(f"Residual before BFS: {residual_graph}")
   BFS(residual_graph, s, t, path, visited, one_path)
   print(f"One path: {one_path}")
+
   if len(one_path) == 0:
     return max_flow
 
@@ -78,12 +90,14 @@ def Ford_Fulkerson(graph, s, t):
           if(initial_vertex == one_path[0][i] and sink == one_path[0][i+1]):
             capacities.append(capacity_flow)
 
+
   print(f"Capacities: {capacities}")
   bottleneck = min(capacities)
-  print(f"Bottleneck: {bottleneck}")
   max_flow += bottleneck
-  print(graph)
-  Ford_Fulkerson(augment(graph, bottleneck, one_path), 1, num_vertices)
+  print(f"Bottleneck: {bottleneck}")
+
+  if(bottleneck != 0):
+    Ford_Fulkerson(augment(graph, bottleneck, one_path), 1, num_vertices)
 
 
 user_input = input().strip().split(" ")
@@ -93,6 +107,7 @@ num_edges = int(user_input[1])
 graph = defaultdict(dict)
 residual_graph = defaultdict(dict)
 max_flow = 0
+count = 0 
 
 for edge in range(num_edges):
   edge_input = input()
