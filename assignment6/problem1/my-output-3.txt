@@ -2,4 +2,42 @@ Actual graph
 defaultdict(<class 'dict'>, {1: {18: (24, 0), 16: (8, 0), 11: (8, 0), 8: (7, 0), 9: (3, 0), 12: (7, 0), 15: (9, 0), 2: (7, 0)}, 11: {20: (6, 0), 4: (8, 0)}, 4: {20: (11, 0)}, 14: {20: (4, 0), 16: (6, 0), 19: (7, 0), 15: (8, 0)}, 9: {20: (14, 0), 7: (8, 0), 8: (10, 0), 4: (4, 0), 19: (10, 0)}, 8: {20: (6, 0)}, 18: {20: (7, 0), 7: (2, 0), 8: (5, 0)}, 16: {20: (5, 0), 5: (3, 0), 7: (10, 0), 17: (4, 0)}, 17: {20: (4, 0), 14: (7, 0), 13: (1, 0), 5: (3, 0)}, 5: {13: (5, 0)}, 15: {9: (4, 0), 7: (2, 0)}, 12: {11: (6, 0), 7: (5, 0)}, 10: {9: (2, 0), 17: (9, 0), 3: (8, 0)}, 3: {2: (10, 0)}, 7: {10: (9, 0)}, 13: {16: (4, 0), 10: (2, 0)}, 6: {16: (10, 0)}})
 Residual graph
 defaultdict(<class 'dict'>, {1: {18: 24, 16: 8, 11: 8, 8: 7, 9: 3, 12: 7, 15: 9, 2: 7}, 11: {20: 6, 4: 8}, 4: {20: 11}, 14: {20: 4, 16: 6, 19: 7, 15: 8}, 9: {20: 14, 7: 8, 8: 10, 4: 4, 19: 10}, 8: {20: 6}, 18: {20: 7, 7: 2, 8: 5}, 16: {20: 5, 5: 3, 7: 10, 17: 4}, 17: {20: 4, 14: 7, 13: 1, 5: 3}, 5: {13: 5}, 15: {9: 4, 7: 2}, 12: {11: 6, 7: 5}, 10: {9: 2, 17: 9, 3: 8}, 3: {2: 10}, 7: {10: 9}, 13: {16: 4, 10: 2}, 6: {16: 10}})
-None
+All paths
+1 visited: visited array: [True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 8, 9, 11, 12, 15, 16, 18}
+2 visited: visited array: [True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 8, 9, 11, 12, 15, 16, 18}
+8 visited: visited array: [True, True, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 8, 9, 11, 12, 15, 16, 18, 20}
+9 visited: visited array: [True, True, False, False, False, False, False, True, True, False, False, False, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 4, 7, 8, 9, 11, 12, 15, 16, 18, 19, 20}
+4 visited: visited array: [True, True, False, True, False, False, False, True, True, False, False, False, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 4, 7, 8, 9, 11, 12, 15, 16, 18, 19, 20}
+7 visited: visited array: [True, True, False, True, False, False, True, True, True, False, False, False, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 4, 7, 8, 9, 10, 11, 12, 15, 16, 18, 19, 20}
+10 visited: visited array: [True, True, False, True, False, False, True, True, True, True, False, False, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 3, 4, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20}
+3 visited: visited array: [True, True, True, True, False, False, True, True, True, True, False, False, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 3, 4, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20}
+11 visited: visited array: [True, True, True, True, False, False, True, True, True, True, True, False, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 3, 4, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20}
+12 visited: visited array: [True, True, True, True, False, False, True, True, True, True, True, True, False, False, False, False, False, False, False, False]
+Set of adj vertices: {2, 3, 4, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20}
+15 visited: visited array: [True, True, True, True, False, False, True, True, True, True, True, True, False, False, True, False, False, False, False, False]
+Set of adj vertices: {2, 3, 4, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20}
+16 visited: visited array: [True, True, True, True, False, False, True, True, True, True, True, True, False, False, True, True, False, False, False, False]
+Set of adj vertices: {2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20}
+5 visited: visited array: [True, True, True, True, True, False, True, True, True, True, True, True, False, False, True, True, False, False, False, False]
+Set of adj vertices: {2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20}
+13 visited: visited array: [True, True, True, True, True, False, True, True, True, True, True, True, True, False, True, True, False, False, False, False]
+Set of adj vertices: {2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20}
+17 visited: visited array: [True, True, True, True, True, False, True, True, True, True, True, True, True, False, True, True, True, False, False, False]
+Set of adj vertices: {2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+14 visited: visited array: [True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True, True, False, False, False]
+Set of adj vertices: {2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+18 visited: visited array: [True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True, True, True, False, False]
+Set of adj vertices: {2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+19 visited: visited array: [True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True, True, True, True, False]
+Set of adj vertices: {2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+20 visited: visited array: [True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True, True, True, True, True]
+Set of adj vertices: {2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}

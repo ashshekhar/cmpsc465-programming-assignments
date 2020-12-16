@@ -1,6 +1,24 @@
 from collections import defaultdict
 
-# def BFS(graph)
+def BFS(graph, s, t, path, visited, all_path):
+
+  visited[s-1] = True
+  path.append(s)
+
+  if(s==t):
+    current_path = path.copy()
+    all_path.append(current_path)
+
+  else:
+    for initial_vertex, sink_capacity_list in graph.items():
+      for sink, capacity_flow in sink_capacity_list.items():
+        if(initial_vertex==s):
+          if(visited[sink-1]==False):
+            BFS(graph, sink, num_vertices, path, visited, all_path)
+
+  path.pop()
+  visited[s-1] = False
+  return all_path
 
 def build_residual(graph):
   for initial_vertex, sink_capacity_list in graph.items():
@@ -19,19 +37,32 @@ def build_residual(graph):
   return residual_graph
 
 def Ford_Fulkerson(graph, s, t):
+  max_flow = 0
   print("Actual graph")
   print(graph)
   print("Residual graph")
   print(build_residual(graph))
-  # BFS(build_residual(graph))
+
+  visited = [False]*(num_vertices)
+  path = []
+  all_path = []
+  print("All paths")
+  BFS(build_residual(graph), s, t, path, visited, all_path)
+
+  if len(all_path) == 0:
+    return 0
+
+  # for path in all_path:
+
+
 
 user_input = input().strip().split(" ")
 num_vertices = int(user_input[0])
 num_edges = int(user_input[1])
-vertices = set()
 
 graph = defaultdict(dict)
 residual_graph = defaultdict(dict)
+adjacent_set = set()
 
 for edge in range(num_edges):
   edge_input = input()
@@ -51,8 +82,5 @@ for edge in range(num_edges):
 
   if(already_present == False):
     graph[edges[0]] [edges[1]] = (edges[2], 0)
-
-  vertices.add(edges[0])
-  vertices.add(edges[1])
-
-print(Ford_Fulkerson(graph, 1, len(vertices)))
+  
+print(Ford_Fulkerson(graph, 1, num_vertices))
