@@ -21,6 +21,7 @@ def BFS(graph, s, t, path, visited, all_path):
   return all_path
 
 def build_residual(graph):
+  residual_graph.clear()
   for initial_vertex, sink_capacity_list in graph.items():
     for sink, capacity_flow in sink_capacity_list.items():
       u = initial_vertex
@@ -40,19 +41,18 @@ def augment(graph, bottleneck, all_path):
   for initial_vertex, sink_capacity_list in graph.items():
     for sink, capacity_flow in sink_capacity_list.items():
       for i in range(len(all_path[0])-1):
+
         if(initial_vertex == all_path[0][i] and sink == all_path[0][i+1]):
           print(f"Initial capacity flow in FE: {capacity_flow} for source {initial_vertex} and sink {sink}")
-          capacity_flow = list(capacity_flow)
-          capacity_flow[1] += bottleneck
-          capacity_flow = tuple(capacity_flow)
+          graph[initial_vertex][sink] = (capacity_flow[0], capacity_flow[1]+bottleneck)
           print(f"New capacity flow in FE: {capacity_flow} for source {initial_vertex} and sink {sink}")
-
+       
         elif(sink == all_path[0][i] and initial_vertex == all_path[0][i+1]):
           print(f"Initial capacity flow in BE: {capacity_flow} for source {initial_vertex} and sink {sink}")
-          capacity_flow = list(capacity_flow)
-          capacity_flow[1] -= bottleneck
-          capacity_flow = tuple(capacity_flow)
+          graph[sink][initial_vertex] = (capacity_flow[0], capacity_flow[1]-bottleneck)
           print(f"New capacity flow in BE: {capacity_flow} for source {initial_vertex} and sink {sink}")
+
+  return graph
 
 
 def Ford_Fulkerson(graph, s, t):
@@ -67,7 +67,7 @@ def Ford_Fulkerson(graph, s, t):
   path = []
   all_path = []
   print("All paths")
-  print(BFS(build_residual(graph), s, t, path, visited, all_path))
+  print(BFS(residual_graph, s, t, path, visited, all_path))
 
   if len(all_path) == 0:
     return max_flow
@@ -83,8 +83,9 @@ def Ford_Fulkerson(graph, s, t):
   bottleneck = min(capacities)
   print(f"Bottleneck: {bottleneck}")
   max_flow += bottleneck
-  augment(graph, bottleneck, all_path)
-  #Ford_Fulkerson(graph, 1, num_vertices)
+  print(graph)
+  Ford_Fulkerson(augment(graph, bottleneck, all_path), 1, num_vertices)
+  print(max_flow)
 
 user_input = input().strip().split(" ")
 num_vertices = int(user_input[0])
