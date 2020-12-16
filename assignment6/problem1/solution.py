@@ -85,7 +85,7 @@ def Ford_Fulkerson(graph, s, t):
   max_flow += bottleneck
   print(graph)
   Ford_Fulkerson(augment(graph, bottleneck, all_path), 1, num_vertices)
-  print(max_flow)
+
 
 user_input = input().strip().split(" ")
 num_vertices = int(user_input[0])
@@ -114,5 +114,6 @@ for edge in range(num_edges):
 
   if(already_present == False):
     graph[edges[0]] [edges[1]] = (edges[2], 0)
-  
-print(Ford_Fulkerson(graph, 1, num_vertices))
+
+Ford_Fulkerson(graph, 1, num_vertices)
+print(max_flow)
