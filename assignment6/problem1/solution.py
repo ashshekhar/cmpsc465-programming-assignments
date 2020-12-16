@@ -1,5 +1,7 @@
 from collections import defaultdict
 
+def 
+
 def build_residual(graph):
   for initial_vertex, sink_capacity_list in graph.items():
     for sink, capacity_flow in sink_capacity_list.items():
@@ -8,12 +10,15 @@ def build_residual(graph):
       c = capacity_flow[0]
       f = capacity_flow[1]
 
-      residual_graph[u][v] = c-f
-      residual_graph[v][u] = f
+      if((c-f) != 0):
+        residual_graph[u][v] = c-f
+
+      if(f!=0):
+        residual_graph[v][u] = f
 
   return residual_graph
 
-def Ford_Fulkson(graph, s, t):
+def Ford_Fulkerson(graph, s, t):
   print("Actual graph")
   print(graph)
   print("Residual graph")
@@ -31,8 +36,8 @@ for edge in range(num_edges):
   edge_input = input()
   edges = list(map(int, edge_input.strip().split(' ')))
   graph[edges[0]] [edges[1]] = (edges[2], 0)
-  
+
   vertices.add(edges[0])
   vertices.add(edges[1])
 
-print(Ford_Fulkson(graph, 1, vertices))
+print(Ford_Fulkerson(graph, 1, vertices))
