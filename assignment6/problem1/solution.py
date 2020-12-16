@@ -47,14 +47,21 @@ def Ford_Fulkerson(graph, s, t):
   path = []
   all_path = []
   print("All paths")
-  BFS(build_residual(graph), s, t, path, visited, all_path)
+  print(BFS(build_residual(graph), s, t, path, visited, all_path))
 
   if len(all_path) == 0:
     return 0
 
-  # for path in all_path:
-
-
+  for path in all_path:
+    capacities = []
+    for initial_vertex, sink_capacity_list in residual_graph.items():
+      for sink, capacity_flow in sink_capacity_list.items():
+         for i in range(len(path)):
+           if(initial_vertex == path[i] and sink == path[i+1]):
+            capacities.append(capacity_flow)
+    print(f"Capacities: {capacities}")
+    bottle_neck = min(capacities)
+    print(f"Bottleneck: {bottle_neck}")
 
 user_input = input().strip().split(" ")
 num_vertices = int(user_input[0])
