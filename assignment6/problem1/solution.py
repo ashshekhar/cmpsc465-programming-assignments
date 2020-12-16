@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-def 
+# def BFS(graph)
 
 def build_residual(graph):
   for initial_vertex, sink_capacity_list in graph.items():
@@ -23,6 +23,7 @@ def Ford_Fulkerson(graph, s, t):
   print(graph)
   print("Residual graph")
   print(build_residual(graph))
+  # BFS(build_residual(graph))
 
 user_input = input().strip().split(" ")
 num_vertices = int(user_input[0])
@@ -35,9 +36,23 @@ residual_graph = defaultdict(dict)
 for edge in range(num_edges):
   edge_input = input()
   edges = list(map(int, edge_input.strip().split(' ')))
-  graph[edges[0]] [edges[1]] = (edges[2], 0)
+  already_present = False
+
+  if(not bool(graph)):
+    graph[edges[0]] [edges[1]] = (edges[2], 0)
+    continue
+
+  for initial_vertex, sink_capacity_list in graph.items():
+    for sink, capacity_flow in sink_capacity_list.items():
+      if(initial_vertex==edges[0] and sink==edges[1]):
+        graph[edges[0]][edges[1]] = (edges[2]+capacity_flow[0], capacity_flow[1])
+        already_present = True
+      break
+
+  if(already_present == False):
+    graph[edges[0]] [edges[1]] = (edges[2], 0)
 
   vertices.add(edges[0])
   vertices.add(edges[1])
 
-print(Ford_Fulkerson(graph, 1, vertices))
+print(Ford_Fulkerson(graph, 1, len(vertices)))
