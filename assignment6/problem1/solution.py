@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 def BFS(graph, s, t, path, visited, one_path):
-  print("Inside BFS")
+
   visited[s-1] = True
   path.append(s)
 
