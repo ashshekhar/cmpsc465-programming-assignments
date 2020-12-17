@@ -5,9 +5,62 @@ defaultdict(<class 'dict'>, {1: {2: 5, 3: 8}, 3: {5: 9, 2: 6, 4: 5}, 4: {5: 4}})
 
 
 Residual before BFS: defaultdict(<class 'dict'>, {1: {2: 5, 3: 8}, 3: {5: 9, 2: 6, 4: 5}, 4: {5: 4}})
-One path: [[1, 3, 5]]
+Inside BFS
+one_path:deque([])
+one_path:deque([1])
+cap: 5
+type: <class 'int'>
+Inside BFS
+one_path:deque([1])
+one_path:deque([1, 2])
+cap: 5
+type: <class 'int'>
+cap: 8
+type: <class 'int'>
+cap: 9
+type: <class 'int'>
+cap: 6
+type: <class 'int'>
+cap: 5
+type: <class 'int'>
+cap: 4
+type: <class 'int'>
+cap: 8
+type: <class 'int'>
+Inside BFS
+one_path:deque([1])
+one_path:deque([1, 3])
+cap: 5
+type: <class 'int'>
+cap: 8
+type: <class 'int'>
+cap: 9
+type: <class 'int'>
+Inside BFS
+one_path:deque([1, 3])
+one_path:deque([1, 3, 5])
+One path: [1, 3, 5]
 Capacities: [8, 9]
 Bottleneck: 8
 Residual before BFS: defaultdict(<class 'dict'>, {1: {2: 5, 3: 0}, 3: {5: 1, 2: 6, 4: 5, 1: 8}, 4: {5: 4}, 5: {3: 8}})
+Inside BFS
+one_path:deque([])
+one_path:deque([1])
+cap: 5
+type: <class 'int'>
+cap: 0
+type: <class 'int'>
+cap: 1
+type: <class 'int'>
+cap: 6
+type: <class 'int'>
+cap: 5
+type: <class 'int'>
+cap: 8
+type: <class 'int'>
+cap: 4
+type: <class 'int'>
+cap: 8
+type: <class 'int'>
 One path: []
 8

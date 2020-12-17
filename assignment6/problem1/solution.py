@@ -1,24 +1,23 @@
 from collections import defaultdict
+from collections import deque
 
-def BFS(graph, s, t, path, visited, one_path):
+def BFS(graph, s, t, visited, one_path):
 
   visited[s-1] = True
-  path.append(s)
+  one_path.append(s)
 
   if(s==t):
-    current_path = path.copy()
-    one_path.append(current_path)
-    return
+    return True
 
   for i in graph.keys():
     for j in graph[i].keys():
-      if(i==s and (graph[i][j] != 0)):
-        if(visited[j-1] == False):
-          BFS(graph, j, num_vertices, path, visited, one_path)
+      if(i==s and graph[i][j] != 0 and visited[j-1] == False):
+        if(BFS(graph, j, t, visited, one_path)):
+          return True
 
-  path.pop()
-  visited[s-1] = False
-
+  one_path.pop()
+  return False
+        
 def augment(graph, bottleneck, one_path):
 
   for initial_vertex, sink_capacity_list in graph.items():
@@ -26,14 +25,14 @@ def augment(graph, bottleneck, one_path):
       c = capacity_flow[0]
       f = capacity_flow[1]
 
-      for i in range(len(one_path[0])-1):
+      for i in range(len(one_path)-1):
 
-        if(initial_vertex == one_path[0][i] and sink == one_path[0][i+1]):
+        if(initial_vertex == one_path[i] and sink == one_path[i+1]):
           graph[initial_vertex][sink] = (c, f+bottleneck)
           residual_graph[initial_vertex][sink] = c-(f+bottleneck)
           residual_graph[sink][initial_vertex] = bottleneck
       
-        elif(sink == one_path[0][i] and initial_vertex == one_path[0][i+1]):
+        elif(sink == one_path[i] and initial_vertex == one_path[i+1]):
           graph[sink][initial_vertex] = (c, f-bottleneck)
           residual_graph[initial_vertex][sink] = c-(f+bottleneck)
           residual_graph[sink][initial_vertex] = bottleneck
@@ -45,33 +44,25 @@ def Ford_Fulkerson(graph, s, t):
   global max_flow
   global count
 
-  print("Actual graph")
-  print(graph)
-
-  print("Residual graph")
-  print(residual_graph)
-  print("\n")
-
   while(True):
+
+    one_path.clear()
     visited = [False]*(num_vertices)
-    path = []
-    one_path = []
-    print(f"Residual before BFS: {residual_graph}")
-    BFS(residual_graph, s, t, path, visited, one_path)
-    print(f"One path: {one_path}")
+    BFS(residual_graph, s, t, visited, one_path)
+    print(f"Path: {one_path}")
 
     if len(one_path) == 0:
       return max_flow
 
     capacities = []
-    for i in range(len(one_path[0])-1):
-      capacities.append(residual_graph[one_path[0][i]][one_path[0][i+1]])
-    print(f"Capacities: {capacities}")
+    for i in range(len(one_path)-1):
+      capacities.append(residual_graph[one_path[i]][one_path[i+1]])
 
+    print(f"Capacities: {capacities}")
     bottleneck = min(capacities)
-    max_flow += bottleneck
     print(f"Bottleneck: {bottleneck}")
-    
+    max_flow += bottleneck
+  
     augment(graph, bottleneck, one_path)
 
 
@@ -83,6 +74,7 @@ graph = defaultdict(dict)
 residual_graph = defaultdict(dict)
 max_flow = 0
 count = 0 
+one_path = deque()
 
 for edge in range(num_edges):
   edge_input = input()
