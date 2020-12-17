@@ -1,5 +1,1 @@
-Path: deque([1, 3, 5])
-Capacities: [8, 9]
-Bottleneck: 8
-Path: deque([])
 8

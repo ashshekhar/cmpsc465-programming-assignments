@@ -49,7 +49,6 @@ def Ford_Fulkerson(graph, s, t):
     one_path.clear()
     visited = [False]*(num_vertices)
     BFS(residual_graph, s, t, visited, one_path)
-    print(f"Path: {one_path}")
 
     if len(one_path) == 0:
       return max_flow
@@ -57,10 +56,8 @@ def Ford_Fulkerson(graph, s, t):
     capacities = []
     for i in range(len(one_path)-1):
       capacities.append(residual_graph[one_path[i]][one_path[i+1]])
-
-    print(f"Capacities: {capacities}")
+      
     bottleneck = min(capacities)
-    print(f"Bottleneck: {bottleneck}")
     max_flow += bottleneck
   
     augment(graph, bottleneck, one_path)
