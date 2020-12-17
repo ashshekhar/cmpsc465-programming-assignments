@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 def BFS(graph, s, t, path, visited, one_path):
-  
+  print("Inside BFS")
   visited[s-1] = True
   path.append(s)
 
@@ -10,12 +10,11 @@ def BFS(graph, s, t, path, visited, one_path):
     one_path.append(current_path)
     return
 
-  else:
-    for initial_vertex, sink_capacity_list in graph.items():
-      for sink, capacity_flow in sink_capacity_list.items():
-        if(initial_vertex==s and capacity_flow!=0):
-          if(visited[sink-1]==False):
-            BFS(graph, sink, num_vertices, path, visited, one_path)
+  for i in graph.keys():
+    for j in graph[i].keys():
+      if(i==s and (graph[i][j] != 0)):
+        if(visited[j-1] == False):
+          BFS(graph, j, num_vertices, path, visited, one_path)
 
   path.pop()
   visited[s-1] = False
@@ -53,31 +52,27 @@ def Ford_Fulkerson(graph, s, t):
   print(residual_graph)
   print("\n")
 
-  visited = [False]*(num_vertices)
-  path = []
-  one_path = []
-  print(f"Residual before BFS: {residual_graph}")
-  BFS(residual_graph, s, t, path, visited, one_path)
-  print(f"One path: {one_path}")
+  while(True):
+    visited = [False]*(num_vertices)
+    path = []
+    one_path = []
+    print(f"Residual before BFS: {residual_graph}")
+    BFS(residual_graph, s, t, path, visited, one_path)
+    print(f"One path: {one_path}")
 
-  if len(one_path) == 0:
-    return max_flow
+    if len(one_path) == 0:
+      return max_flow
 
-  capacities = []
-  for initial_vertex, sink_capacity_list in residual_graph.items():
-    for sink, capacity_flow in sink_capacity_list.items():
-      for i in range(len(one_path[0])-1):
-        if(initial_vertex == one_path[0][i] and sink == one_path[0][i+1]):
-          capacities.append(capacity_flow)
+    capacities = []
+    for i in range(len(one_path[0])-1):
+      capacities.append(residual_graph[one_path[0][i]][one_path[0][i+1]])
+    print(f"Capacities: {capacities}")
 
-
-  print(f"Capacities: {capacities}")
-  bottleneck = min(capacities)
-  max_flow += bottleneck
-  print(f"Bottleneck: {bottleneck}")
-
-  if(bottleneck != 0):
-    Ford_Fulkerson(augment(graph, bottleneck, one_path), 1, num_vertices)
+    bottleneck = min(capacities)
+    max_flow += bottleneck
+    print(f"Bottleneck: {bottleneck}")
+    
+    augment(graph, bottleneck, one_path)
 
 
 user_input = input().strip().split(" ")
@@ -99,13 +94,10 @@ for edge in range(num_edges):
     residual_graph[edges[0]] [edges[1]] = edges[2]
     continue
 
-  for initial_vertex, sink_capacity_list in graph.items():
-    for sink, capacity_flow in sink_capacity_list.items():
-      if(initial_vertex==edges[0] and sink==edges[1]):
-        graph[edges[0]][edges[1]] = (edges[2]+capacity_flow[0], capacity_flow[1])
-        residual_graph[edges[0]] [edges[1]] = edges[2]+capacity_flow[0]
-        already_present = True
-      break
+  if(edges[1] in graph[edges[0]].keys()):
+    graph[edges[0]][edges[1]] = (edges[2]+graph[edges[0]][edges[1]][0], graph[edges[0]][edges[1]][1])
+    residual_graph[edges[0]] [edges[1]] = edges[2]+graph[edges[0]][edges[1]][0]
+    already_present = True
 
   if(already_present == False):
     graph[edges[0]] [edges[1]] = (edges[2], 0)
