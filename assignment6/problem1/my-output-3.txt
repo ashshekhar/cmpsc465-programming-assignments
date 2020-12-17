@@ -1,45 +1,44 @@
-defaultdict(<class 'dict'>, {1: {18: (24, 0), 16: (8, 0), 11: (8, 0), 8: (7, 0), 9: (3, 0), 12: (7, 0), 15: (9, 0), 2: (7, 0)}, 11: {20: (6, 0), 4: (8, 0)}, 4: {20: (11, 0)}, 14: {20: (4, 0), 16: (6, 0), 19: (7, 0), 15: (8, 0)}, 9: {20: (14, 0), 7: (8, 0), 8: (10, 0), 4: (4, 0), 19: (10, 0)}, 8: {20: (6, 0)}, 18: {20: (7, 0), 7: (2, 0), 8: (5, 0)}, 16: {20: (5, 0), 5: (3, 0), 7: (10, 0), 17: (4, 0)}, 17: {20: (4, 0), 14: (7, 0), 13: (1, 0), 5: (13, 0)}, 5: {13: (5, 0)}, 15: {9: (4, 0), 7: (2, 0)}, 12: {11: (6, 0), 7: (5, 0)}, 10: {9: (2, 0), 17: (9, 0), 3: (8, 0)}, 3: {2: (10, 0)}, 7: {10: (9, 0)}, 13: {16: (4, 0), 10: (2, 0)}, 6: {16: (10, 0)}})
 Path: deque([1, 18, 20])
-Capacites for the above path:[30, 7]
-7
+Capacities: [30, 7]
+Bottleneck: 7
 Path: deque([1, 18, 7, 10, 9, 20])
-Capacites for the above path:[17, 2, 9, 2, 20]
-9
+Capacities: [17, 2, 9, 2, 20]
+Bottleneck: 2
 Path: deque([1, 18, 8, 20])
-Capacites for the above path:[15, 5, 6]
-14
+Capacities: [15, 5, 6]
+Bottleneck: 5
 Path: deque([1, 16, 20])
-Capacites for the above path:[8, 5]
-19
+Capacities: [8, 5]
+Bottleneck: 5
 Path: deque([1, 16, 5, 13, 10, 17, 20])
-Capacites for the above path:[3, 3, 5, 2, 9, 4]
-21
+Capacities: [3, 3, 5, 2, 9, 4]
+Bottleneck: 2
 Path: deque([1, 16, 7, 10, 17, 20])
-Capacites for the above path:[1, 10, 7, 7, 2]
-22
+Capacities: [1, 10, 7, 7, 2]
+Bottleneck: 1
 Path: deque([1, 11, 20])
-Capacites for the above path:[8, 6]
-28
+Capacities: [8, 6]
+Bottleneck: 6
 Path: deque([1, 11, 4, 20])
-Capacites for the above path:[2, 8, 14]
-30
+Capacities: [2, 8, 14]
+Bottleneck: 2
 Path: deque([1, 8, 20])
-Capacites for the above path:[7, 1]
-31
+Capacities: [7, 1]
+Bottleneck: 1
 Path: deque([1, 9, 20])
-Capacites for the above path:[3, 12]
-34
+Capacities: [3, 12]
+Bottleneck: 3
 Path: deque([1, 12, 11, 4, 20])
-Capacites for the above path:[7, 6, 6, 9]
-40
+Capacities: [7, 6, 6, 9]
+Bottleneck: 6
 Path: deque([1, 12, 7, 10, 17, 20])
-Capacites for the above path:[1, 5, 6, 6, 1]
-41
+Capacities: [1, 5, 6, 6, 1]
+Bottleneck: 1
 Path: deque([1, 15, 9, 20])
-Capacites for the above path:[9, 4, 9]
-45
+Capacities: [9, 4, 9]
+Bottleneck: 4
 Path: deque([1, 15, 7, 10, 17, 14, 20])
-Capacites for the above path:[5, 2, 5, 5, 7, 4]
-47
+Capacities: [5, 2, 5, 5, 7, 4]
+Bottleneck: 2
 Path: deque([])
 47

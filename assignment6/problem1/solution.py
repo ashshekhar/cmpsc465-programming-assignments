@@ -30,12 +30,12 @@ def augment(graph, bottleneck, one_path):
         if(initial_vertex == one_path[i] and sink == one_path[i+1]):
           graph[initial_vertex][sink] = (c, f+bottleneck)
           residual_graph[initial_vertex][sink] = c-(f+bottleneck)
-          residual_graph[sink][initial_vertex] = bottleneck
+          residual_graph[sink][initial_vertex] = f+bottleneck
       
         elif(sink == one_path[i] and initial_vertex == one_path[i+1]):
-          graph[sink][initial_vertex] = (c, f-bottleneck)
-          residual_graph[initial_vertex][sink] = c-(f+bottleneck)
-          residual_graph[sink][initial_vertex] = bottleneck
+          graph[initial_vertex][sink] = (c, f-bottleneck)
+          residual_graph[initial_vertex][sink] = c-(f-bottleneck)
+          residual_graph[sink][initial_vertex] = f-bottleneck
 
   return graph
 
