@@ -2,7 +2,7 @@ from collections import defaultdict
 from collections import deque
 
 def BFS(graph, s, t, visited, one_path):
-
+  
   visited[s-1] = True
   one_path.append(s)
 
