@@ -34,4 +34,3 @@ for edge in range(num_edges):
   graph[edges[0]] [edges[1]] = edges[2]
 
 print(Bellman_Ford())
-

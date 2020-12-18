@@ -34,5 +34,4 @@ for lines in range (numEdges):
     line = [int(i) for i in input().split(" ")]
     edges.append(line)
 
-
 Dijkstra(numVertices, sourceVertex, edges)
