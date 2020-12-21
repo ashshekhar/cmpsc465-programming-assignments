@@ -1,2 +1,2 @@
-This repo hosts the programming assignments for course Data Structures and Algorithms (CMPSC 465), Fall 2020.
+This repo hosts the programming assignments for Data Structures and Algorithms (CMPSC 465) by Professor Mingfu Shao, Fall 2020.
 
