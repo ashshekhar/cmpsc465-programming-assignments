@@ -1,0 +1,154 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{geometry}
+\usepackage{pslatex}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{indentfirst}
+\geometry{ margin = 1.0in }
+
+%%% TODO modify these variables %%%
+\def\homeworknum{5}
+\def\namex{Paridhi Khandelwal}
+\def\namey{Shashwat Shekhar}
+\def\namez{Abdulaziz Alsarrani}
+\def\namem{Adhiraj Agarwal}
+\def\accessx{pjk5458}
+\def\accessy{svs6603}
+\def\accessz{ana5493}
+\def\accessm{apa5649}
+%%%%
+
+\pagestyle{fancy}
+\lhead{{\bf CMPSC 465 Fall 2020}}
+\chead{{\bf Writing Assignment~\homeworknum}}
+\rhead{{\bf \today}}
+
+\newcounter{problemid}\stepcounter{problemid}
+\def\newproblem{\vspace*{0.5cm}{\bf Problem~\arabic{problemid}\stepcounter{problemid}}\hfill\fbox{\parbox{0.16\textwidth}{\bf Points:}}\par}
+
+\setlength\parindent{0em}
+\setlength\parskip{8pt}
+\setlength{\fboxsep}{6pt}
+
+
+\begin{document}
+
+\framebox[\textwidth]{
+	\parbox{0.96\textwidth}{
+		\parbox{0.1\textwidth}{\bf Name~1:}\parbox{0.6\textwidth}{\namex}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessx} \\ 
+		\parbox{0.1\textwidth}{\bf Name~2:}\parbox{0.6\textwidth}{\namey}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessy} \\ 
+		\parbox{0.1\textwidth}{\bf Name~3:}\parbox{0.6\textwidth}{\namez}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessz} \\ 
+		\parbox{0.1\textwidth}{\bf Name~4:}\parbox{0.6\textwidth}{\namem}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessm}
+	}
+}
+
+
+%% your solutions %%%
+\newproblem
+{\bf 1.1} Running Kruskal's Algorithm, we get the following order of edges being added to the MST: (a,c), (a,b), (b,e), (c,f), (d,e), (f,g)\\\\
+{\bf 1.2} Running Prim's Algorithm, we get the following order of vertices being added to the MST: (a), (c), (b), (e), (d), (f), (g)
+
+\newproblem
+For this problem, we are given a graph, the weight of its edges, and its minimum spanning tree. And, we are asked to find the minimum spanning tree after removing a single edge.
+
+We will solve this problem using the cut-property of the Kruskal's algorithm. 
+
+Firstly, if the removed edge is not part of the original minimum spanning tree, then the minimum spanning tree does not change and we return it.
+
+However, if the removed edge is part of the original minimum spanning tree, then we must use the cut property of the Kruskal's algorithm. 
+
+After we remove an edge from the minimum spanning tree, we are left with a partial minimum spanning tree with $|V|-2$ edges and thus, we only need to add one edge in order to complete the minimum spanning tree. 
+
+Once the edge is removed, our graph will be split up into disjoint connected components. And, the resulting partial MST will either be its own connected component or it will be split into two connected components based on whether the removed edge was on the outer or inner part of the original MST. In order to satisfy the E(C)$\cap$ $E_{1}$=$\emptyset$ property, the cut needs to include an entire component or exclude it entirely. Where $E_{1}$ is the partial MST. 
+
+Thus, we loop through the partial MST vertices and find a connected component of partial MST vertices (either one complete one or one of two possible subsets), we then take that as a cut and we check the E(C)$\cap$ $E_{1}$=$\emptyset$ property and if satisfied, we add the minimum cut edge to the partial MST in order to construct the complete MST. 
+
+$\bf Proof$: Since we used the cut property of the Kruskal's algorithm, then we have an inherent proof of concept.
+
+{\bf Time complexity:} In this algorithm, we loop through the vertices to find a connected component of partial MST vertices which takes O($|E|$) due to the fact that the partial MST has only $|E|$ vertices and the connected component has the same, or less (if the partial MST connected component is split into two parts). And since there is no other loop in the algorithm, the time complexity is O($|E|$).
+
+\newproblem
+
+{\bf 3.1} {\bf To prove:} $e^* := max_{e\epsilon C} w(e)$ cannot be in any of the MST of graph G 
+
+{\bf Proof:}
+Let us consider that the MST of graph G contains an edge $e^*$ which is the heaviest edge of cycle C. Thus, this means that $e^*$ connects the cycle vertices to the rest of the MST. However, for each cycle, there is also another edge, say $e$ which is present in the cycle and that connects the cycle vertices to the MST (which completes the MST). 
+
+Therefore, since $e$ is within the cycle and is not the heaviest edge within the cycle, we can form a lighter MST with  $e$ rather than using  $e^*$. This contradicts our assumption that the heaviest edge $e^*$ is present in the MST of graph G.
+
+{\bf 3.2} The graph which we are given for this question has $|V| + 9$ edges which means that this graph contains cycles. And, the statement we proved in 3.1 states that the heaviest edge in a cycle can never be in the MST. Thus, we can use DFS with a visited array to go through the graph and find any cycles and then delete their heaviest edge. By doing this 10 times, the number of edges which will remain will be $|V| + 9 - 10$ which is equal to $|V|-1$ edges, the exact number of edges in the MST. Thus, the remaining "sub-tree" will be the MST of the graph.
+
+This algorithm is correct due to the fact that we used our proved conclusion from 3.1 and also the fact that upon removing those edges which do not affect the MST will result in the required number of edges for the MST of the graph. Thus, due to our use of those properties, this is an inherent proof of concept.
+
+{\bf Runtime:} The runtime of DFS in $O(|V|+|E|)$. Given, $|E|=|V|+9$, the runtime will be $O(|V|+|V|+9)$ which is equivalent to $O(|V|)$
+
+\newproblem
+From the problem stated, we can clearly see that $R_i$ is larger than $L_i$ and both are within the range [1,10000].
+
+To obtain the minimized set of integers S as the output satisfying that for any interval [$L_i$,$R_i$], there are at least one integer in S that is inside that interval, we will use the interval scheduling algorithm (greedy algorithm) introduced in lecture 33, with some changes. 
+
+Let the n intervals be in an array A where A[i]= [$L_i$,$R_i$].
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+Greedy Algorithm
+    Initialize an empty array S[].
+    Sort the intervals in increasing order of their $R_i$.
+    Build indexing structure:p
+    k=1
+    while(k<=n)
+        if(p[k]==NULL)
+            add any number belonging to the interval A[k].
+        else
+            pick a number less than $R_k$ but greater then $L_i$ [k+1<=i<=p[k]-1] and add it to S.
+        k=p[k]
+    end while
+end Algorithm
+\end{Verbatim}
+
+{\bf Explanation / Proof:}
+Here, in each iteration, we select a number that is common to all the intervals from A[k] to before p[k] (if p[k] is not NULL). For any A[k], earliest future interval is p[k],this implies that the intervals in between A[k] and p[k] overlap with A[k].
+
+If the earliest future interval is NULL for some A[k],then we pick any number belonging to that interval since the number selected would be present only in that specific interval(A[k]).
+
+Hence, selecting a common number of these intervals will obtain the minimized set S. 
+
+The {\bf runtime} of the algorithm is $O(nlogn)$ as stated in the lecture 33. The run time is dominated by the sorting step in the algorithm.
+
+
+\newproblem
+According to the problem, we have a list L with n items each ($p_i$) having an importance rate ($w_i$$>$=0).
+
+To find the minimized total money that needs to be spent, we use a greedy algorithm. 
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+Greedy Algorithm
+    Initialize an array cost[] with n items all assigned a value of one.
+    i=1
+    for(i=1;i<=n;i++)
+        if(i==1)
+            if(L[i]>L[i+1])
+                cost[i]=cost[i+1]+1
+        else if(i==n)
+            if(L[i]>L[i-1])
+                cost[i]=cost[i-1]+1
+        else
+            if(L[i]>L[i+1] && L[i]>L[i-1])
+                cost[i]=cost(max(L[i+1],L[i-1]))+1
+            else if(L[i]>L[i+1])
+                cost[i]=cost[i+1]+1
+                cost[i-1]=cost[i]+1
+            else if(L[i]>L[i-1])
+                cost[i]=cost[i-1]+1
+                
+    return cost
+end Algorithm
+\end{Verbatim}
+
+{\bf Runtime: }
+Since the for loop iterates for n (finite) times, the run time of the algorithm is O(n).
+
+{\bf Explanation / Proof:}
+Cost array is initialized with one since every item in the list L is bought. In each iteration, the value of L[i]is compared to its neighbours and necessary update on the cost is made.  If the current item is bigger than the next one, the cost is increased and concurrently, cost of previous item is also updated. If the item is larger than both the neighbours, then the cost of it is one higher than the max of both the neighbour’s cost.  This algorithm finds the final cost of each element after n (i.e number of items in the array) iterations later.
+
+\end{document}

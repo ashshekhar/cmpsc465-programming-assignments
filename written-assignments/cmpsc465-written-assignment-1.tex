@@ -1,0 +1,304 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{geometry}
+\usepackage{pslatex}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{indentfirst}
+\geometry{ margin = 1.0in }
+
+%%% TODO modify these variables %%%
+\def\homeworknum{1}
+\def\namex{Paridhi Khandelwal}
+\def\namey{Shashwat Shekhar}
+\def\namez{Abdulaziz Alsarrani}
+\def\namem{Adhiraj Agarwal}
+\def\accessx{pjk5458}
+\def\accessy{svs6603}
+\def\accessz{ana5493}
+\def\accessm{apa5649}
+%%%%
+
+\pagestyle{fancy}
+\lhead{{\bf CMPSC 465 Fall 2020}}
+\chead{{\bf Writing Assignment~\homeworknum}}
+\rhead{{\bf \today}}
+
+\newcounter{problemid}\stepcounter{problemid}
+\def\newproblem{\vspace*{0.5cm}{\bf Problem~\arabic{problemid}\stepcounter{problemid}}\hfill\fbox{\parbox{0.16\textwidth}{\bf Points:}}\par}
+
+\setlength\parindent{0em}
+\setlength\parskip{8pt}
+\setlength{\fboxsep}{6pt}
+
+
+\begin{document}
+
+\framebox[\textwidth]{
+	\parbox{0.96\textwidth}{
+		\parbox{0.1\textwidth}{\bf Name~1:}\parbox{0.6\textwidth}{\namex}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessx} \\ 
+		\parbox{0.1\textwidth}{\bf Name~2:}\parbox{0.6\textwidth}{\namey}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessy} \\ 
+		\parbox{0.1\textwidth}{\bf Name~3:}\parbox{0.6\textwidth}{\namez}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessz} \\ 
+		\parbox{0.1\textwidth}{\bf Name~4:}\parbox{0.6\textwidth}{\namem}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessm}
+	}
+}
+
+
+%% your solutions %%%
+\newproblem
+{\bf Running code: }
+The code below is some python code which we wrote for this question with A being our example array, k=3 is a random value we have tested k out to be which means our A[k] in this case is A[3] which is equal to 8 in this example.
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+A = [2,5, 8, 9, 3, 6, 4]
+k = 3
+L = []
+s = []
+
+for i in range(1, n+1):
+    L.append(1)
+    for j in range(1, i):
+        if(A[j-1] < A[i-1] and L[j-1] + 1 > L[i-1]):
+            if((k-1>=i-1 and A[k-1] >= A[i-1]) or (k-1 <= i-1 and A[k-1] <= A[i-1])):
+                L[i-1] = L[j-1] + 1
+                s.append(A[j-1])
+                s.append(A[i-1])
+s = list(dict.fromkeys(s))
+print(s)
+\end{Verbatim}
+
+{\bf Explanation: }\\
+{\bf First analysis: } This problem asks us to design an algorithm to find the longest increasing subsequence of an array A, that includes the term A[k]. Thus, we can immediately see that this is an expansion of the LIS problem which was introduced in class. 
+
+{\bf Approach:} As the time complexity required for this problem is O($n^2$), which is the same as the original LIS problem, we will try to not change the for loops in the original LIS pseudocode in order to maintain the time complexity.
+
+{\bf Main issue: } The LIS algorithm find the overall longest increasing subsequence by considering the last element of the subsequence to be a different A[k] each time. Thus, we must find a way to calculate the longest subsequence which includes A[k] and doesn't necessarily end with it.
+
+{\bf Solution: } The if condition in the original LIS pseudocode checks whether or not the value of A[j-1] should be included in the in the subsequence which ends at A[i-1], thus we add an additional if condition which checks whether the index of A[i-1] is smaller or larger than the index of A[k]. If the index, is smaller, then A[i-1] should be smaller than A[k] and vice versa. Because, if that was not the case, then A[k] would not be in the subset as it would not be increasing if A[k] was included. This way, the added if condition excludes the subsets which dont include A[k]. And for each iteration of the main for loop, the points included in the subset will be built upon because they are all compared to A[k]. This means that any values which are determined to be in the subset in any iteration of the outer for loop will be in the final subsequence answer to the problem.
+
+Also, to get the actual values included in the subset, we append the A[j-1] and A[i-1] values to an array s whenever the new if condition is satisfied. That is because, as explained above, the if condition checks whether or not those two values are in the should be in the subset.
+
+Finally, as this process occurs n times, our array s will contain duplicates of the final values of our subset, so we take only the unique values and print the final s array which is the subset answer to the problem.\\\\
+
+{\bf Runtime:} O($n^2$) since there are two for loops, one outer and one inner and the outer for loop runs n times while the inner runs 1 to i times for a worst case maximum of i=n times. Thus, the run time is $nxn$ = O($n^2$).
+
+
+\newproblem
+{\bf Subproblem:}
+Let us define the subproblem as follows. Let $L([A[0,1,2...i]],[B[0,1,2...j]])$ represent the length of the longest subsequence between the first $i$ characters of string A and the first $j$ characters of string B. 
+
+Therefore, we can design a dynamic programming table based on this such that L[i][j] will represent the length of the longest subsequence between the first $i$ characters of string A and the first $j$ characters of string B.
+
+According to this definition, $L[m][n]$ will give us the desired length of LCS of strings A and B
+
+{\bf Recurrence relationship and explanation:}
+The recurrence relation can be explained as follows. We start by checking the first two characters of A and B. If they match, then we know there is at least one character in the subsequence. So we add 1 to the LCS for those two characters and move on to repeat the same for  next set of characters. 
+
+In case the characters don't match, then we fill that $L[i][j]$ out by choosing the max LCS values between $L[i-1][j]$ which represents the box to the left of $L[i][j]$ and $L[i][j-1]$ which represents the the box just above $L[i][j]$. 
+
+The purpose of doing this is that we want to check compare the LCS values of the nearest two substrings to this $L[i][j]$ and retain the maximum LCS length between them.
+
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+    if(A[i] == B[j]):
+        L[i][j] = 1+L[i-1][j-1]
+    else:
+        L[i][j] = max(L[i-1][j], L[i][j-1])
+\end{Verbatim}
+
+{\bf Base case:} Clearly if we have the case where L[i][0] and L[0][j], i.e if the length of either of the substrings is 0, then it does not make sense to calculate the "common" subsequence. Therefore, in the DP table we have the following base case:
+
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+    for i in range(m):
+        L[i][0] = 0
+    for j in range(n):
+        L[0][j] = 0
+\end{Verbatim}
+
+{\bf Complete explanation of the algorithm: } We design a DP table, $L[m+1][n+1]$ and start filling our DP table as described above. The base case covers the first row and column. Starting from the second row second column, we start running the recursive algorithm as described above and fill each $L(i,j)$ based on the if conditions. 
+
+Each i and j value represents one character of the string A and B respectively. For example, if A = "abc" and B = "abcd" then row i = 2 represents the character "b" of string A and column j = 3 represents the character "c" from string B. Therefore, L[i][j] will represent the length of the longest subsequence between the first $i$ characters of string A and the first $j$ characters of string B.
+
+Thereafter, we follow the explanation of the recurrence relation above to fill the whole DP table. At the end, $L[m][n]$ will give us the desired length of LCS of strings A and B.
+
+{\bf Finding the LCS: }
+Once we have the DP table completely filled, we start traversing the DP table backwards starting from $L[m][n]$. We check if $L[i][j]$ is the maximum of $L[i-1][j], L[i][j-1])$, if yes, then we move to some $L[i^*][j^*]$ such that $L[i^*][j^*] =  L[i-1][j], L[i][j-1])$.
+
+If $L[i][j]$ is not the maximum of $L[i-1][j], L[i][j-1])$, then we move up diagonally to some $L[i^*][j^*]$ such that $L[i^*][j^*] =  L[i-1][j-1]$. We keep track of the character represented at this $L[i][j]$ and append it to a string S.
+
+Repeat the same until we reach first row. Finally, S.reverse() or S[::-1] will give you the desired longest common subsequence.
+
+{\bf Runtime:} The runtime is $O(mn)$ since each character is being scanned only once for creating the DP table. 
+
+{\bf Psuedocode: }Complete code for length of LCS was done in Programming Assignment 4, Problem 2. 
+
+
+\newproblem
+{\bf Subproblem:} Let us define the sub-problem as follows. Let maxPoint[] denote an array such that maxPoint[i] indicates the maximum points that can be earned by solving the questions starting from i to n (of course, skipping $p_i$ problems for each ith problem we solve), where i may or may not be included. 
+
+Therefore, if we are going from i = n-1 to 1, maxPoint[1] will give us the maximum points that can be scored in the quiz. 
+
+{\bf Recurrence relationship and explanation:} The recurrence relation can be explained as follows. In the algorithm we assume that indices are from 1 to n. We start by running a for loop from n-1 to 1 and n being our base case. Each n has (x$_i$, p$_i$) where x$_i $ is the number of points for the ith question and p$_i$ being the questions going to be skipped due to the ith question. 
+
+For each i value (from n-1 to 1), we start by checking if p$_i$ is 0, if it is 0, we know we can add the x$_i$ and the maxPoint[i+1], no question has to be skipped. 
+
+But if p$_i$ is more than 0, we have an option of either choosing to do the ith question or skipping it. If we choose to do it, then maxPoint[i] is given by (x$_i$ + maxPoint[i+p$_i$+1]). Else, maxPoint[i] is given by maxPoint[i+1]. Finally, we choose the maximum out of these two 
+
+The purpose of doing this is to make sure to keep the max value for the points by checking the last value or adding the ith value and choose which one gives us the maxPoint and retain it.
+
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+maxPoint = []*n
+
+maxPoint[n]=x$_n
+
+for i in range(n-1 to 1):
+    if (p$_i$==0):
+        maxPoint[i]=x$_i$ + maxPoint[i+1]
+    else:
+        maxPoint[i]=max(x$_i$ + maxPoint[i+p$_i$+1], maxPoint[i+1])
+        
+return(maxPoint[1])
+\end{Verbatim}      
+{\bf Base Case:} Clearly since n the is the last question, maxPoint[n] = $x_n$ is our base case.Therefore, in the algorithm we have the following case:
+
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+maxPoint[n] = x$_n$
+\end{Verbatim}
+
+{\bf Complete explanation of the algorithm:} We design an algorithm to find the maximum number of points the student can get. So, we start traversing in a reverse order. We take the nth problem and give its x$_i$ value to maxPoint[i]. Starting from the (n-1)th term, we start by running a recursive algorithm as described above and update the maxPoint array based on the if conditions.
+
+Each question has a x$_i$ and p$_i$ value which we use in the above if statements to determine the value of maxPoint[i] to find the max number of points that can be earned in the quiz from the questions within the range i to n. 
+
+For example: Let's suppose we have the following ($x_i$, $p_i$) values, [(4,1), (6,0), (5,2)]. Here taking the base case as (5,2), we set the maxPoint[i] = 5. Now when we enter the recursive algorithm, we check all the conditions and update the maxPoint array. In this case the maxPoint[1] will be 11. (We assume that 1 is the array's first index)
+
+Therefore, using the base case and recursive algorithm, we are able to find the maximum number of points that can be attained.
+
+{\bf Runtime:} The runtime is $O(n)$ since there is a single for loop and we scan through each index only once.
+
+{\bf Pseudocode:}
+
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+maxPoint = []*n
+
+maxPoint[n]=x$_n$
+
+for i in range(n-1 to 1):
+    if (p$_i$==0):
+        maxPoint[i]=x$_i$ + maxPoint[i+1]
+    else:
+        maxPoint[i]=max(x$_i$ + maxPoint[i+p$_i$+1], maxPoint[i+1])
+return (maxPoint[1])
+\end{Verbatim}        
+
+
+\newproblem 
+
+{\bf Pseudocode: }
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+    v = []
+    currentMax = 0
+    finalMax = 0
+    
+    for i in range(n):
+        currentMax += v[i]
+        
+        if(currentMax < 0):
+            currentMax = 0
+            
+        elif(finalMax > 0 and finalMax < currentMax):
+            finalMax = currentMax
+        
+    return finalMax
+\end{Verbatim}
+
+{\bf Explanation: }
+Our problem is to basically find the maximum sum we can get from the given array v, such that the elements are contiguous. 
+
+Therefore, we adopt a simple approach where we define two variables, $currentMax$ which keeps changing in every for loop iteration and another variable $finalMax$ which only retains the maximum sum calculated up until now. 
+
+In each iteration, we add the current ingredient value to the variable $currentMax$ and check if adding that value causes our sum to go below 0. If yes, then revert back the value of $currentMax$ to 0. This means that adding that $ith$ element is not adding to our purpose of finding the maximum sum but rather decreasing the sum we have found out up until now. Therefore we start from value 0 again for the next $(i+1)th$ ingredient value.
+
+Each time our $currentMax$ is holding a value greater than our $finalMax$ that means we can update $finalMax$ with the new maximum value. This happens when we encounter an ingredient value that is adding to our purpose of finding max sum. 
+
+Clearly, at the end of the for loop, $finalMax$ contains the final maximum possible sum.
+
+{\bf Runtime: }
+Since the pseudocode has only one for loop, the running time is $O(n)$
+
+\newproblem
+{\bf First analysis: }
+For this problem, we are being asked to calculate the number of chanting patterns, given a length n where the pattern consists of 1s and 0s which indicate whether a trumpet is blown or "Penn State" is chanted. There is an added constraint that the pattern must not have two trumpet blows (ie. two 1s) in a row. Thus, patterns can either end in 1, or 0 and if they end in 1 there is only one possibility for what the previous number is (ie. 0), but if they end in 0, there are two possibilities for what the previous number is (ie. 0 or 1).
+
+{\bf Approach: } In order to solve this, we will divide the entire n length solution into subproblems where we find the number of possible chants for a chant which ends in 1 and a chant which ends in 0 for that specific sublength of n. Then, we use those values to do the same thing for a longer sublength of n, one by one, until we calculate the final possible values for both kind of chant endings and we sum them up and return the value. 
+
+{\bf Base case: } To go with the approach above, we would need to include a base case for both of our possible endings if the sublength was 1. As in, for a pattern of length 1 it can either be 0 or 1.
+
+{\bf Pseudocode:} 
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+init chantPatternZero[n] //array
+init chantPatternOne[n] // array
+
+chantPatternZero[0] = 1
+chantPatternOne[0] = 1
+for loop i from 1 to <= n-1: 
+    chantPatternZero[i] = chantPatternZero[i-1] + chantPatternOne[i-1]
+    chantPatternOne[i] = chantPatternZero[i-1]
+
+return (chantPatternZero[n-1] + chantPatternOne[n-1])
+\end{Verbatim}
+{\bf Explanation: } In the above pseudocode, we declare two arrays chantPatternZero holds the number of possible chant patterns which end at 0 for all possible sublengths and chantPatternOne which holds the number of possible chant patterns which end at 1 for all possible sublenghts. (ie. chantPatternZero[3] is the number of possible chant patterns of length 3 which end in 0).
+
+Then to implement the base case we discussed above, we set the 
+chantPatternZero[0] = 1 and chantPatternOne = 1 (ie. the possible chant patterns of size 1 for both endings is equal to 1)
+
+Then, we loop from i = 1 to n-1 (ie. the possible sublengths with consideration to our array index startign at 0 which is why we go to n-1). 
+
+And for each iteration, we do 
+chantPatternZero[i] = chantPattern[i-1] + chantPatternOne[i-1] which adds the max chant patterns of both types for the i-1 length and we also do 
+chantPatternOne[i] = chantPatternZero[i-1]
+
+these two operations are used because once a new number is added, it can have two possibilities (0 or 1). In the case an algorithm ends in 0, this 0 can be added on to the max of both the previous patterns that end in 1 and also the ones that end in 0. While in the case an algorithm ends in 1, this one can only be added to the max of the previous patterns that ended in 0 as we cant have two ones in a row.
+
+Finally, we add the value found at the n-1 index of each array as they represent the maximum chant patterns of their respective types for length n. Then, we return that value. 
+
+{\bf Running Time: } In the pseudocode for this problem, we only include one for loop which has a total of n-1 iterations, so this is a constant value for each n and thus, the run time is O(n). Since we can disregard the $-1$.
+
+\newproblem{}
+{\bf Subproblem: } Let us define the subproblem as follows: the price for making a cut at a specific marker in relation to the length of the plank the marker is on. 
+
+Therefore, we can design a dynamic programming algorithm which will choose the best possible cut order based on the order of the cuts and the changing length of the plank for each.
+
+{\bf Recurrence relationship and explanation: } The recurrence relationship can be explained as follows. For each plank length, we try to find which between the left-most and right-most markers is the furthest away from the edge. This will allow us to create a plank which contains all of the remaining markers while remaining as the smallest size plank which applies to this condition. The reason we do this, is because now each new cut will make the plank into the smallest value we can get while including the remaining markers. This means that we add a smaller value with each new cut.
+
+{\bf Base Case: } The base case is that the price of the first cut is equal to the size of the initial plank. 
+
+{\bf Complete explanation of the algorithm: } We start off by finding the left-most and right-most marker. We then calculate the size of the plank which contains the rest of the markers if we cut at either one of those two positions. We choose to cut at the marker which results in the smaller plank. Then, we do the same thing with the new smaller plank that contains all of the markers. Thus, we are maintaining the remaining markers together with each cut in order to ensure that the planks get smaller and smaller by the max margin which will result in the minimum price to make all the cuts.
+
+{\bf Pseudocode: } Let's assume the array of sorted marker locations we are given is called $markers$
+
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+
+minimumCost = 0
+numberOfCuts = len(markers)
+for i = 1 to numberOfCuts:
+    if (k - markers[-1] < k - markers[0]):
+        minimumCost += k
+        k = markers[-1]
+        markers.pop(markers[-1])
+    else:
+        minimumCost += k 
+         k = k -markers[0]
+         markers.pop(markers[0])
+return(minimumCost)        
+\end{Verbatim}
+In this pseudocode, we first set the variable $minimumCost = 0$ as it will hold the minimum cost of cutting the markers. Then, we store the length of the inputted array of markers to use for our for loop as we will be editing the value of the array as we go along and because the loop will run for that many times.
+
+Then, for each iteration, we retrieve the leftmost and rightmost marker values and see which cut will result in a larger plank. We choose the cut which results in the smaller sized plank. 
+
+Then, we update the value of $minimumCost$ by adding the size of the plank we cut to it. Then, we update the value of k to equal the size of the plank with the remaining markers based on whether we cut the leftmost or rightmost. Then, we pop the marker we cut from the $marker$ array, and loop again.
+
+Finally, we return the value of $minimumCost$.
+
+{\bf Running time: } In this algorithm, we only have one for loop which runs for the length of the array which holds all of the markers to cut at. Thus, the running time for this algorithm is $O(len(markers)$
+
+\end{document}

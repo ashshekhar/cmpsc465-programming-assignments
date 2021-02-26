@@ -1,0 +1,286 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{geometry}
+\usepackage{pslatex}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{indentfirst}
+\geometry{ margin = 1.0in }
+
+%%% TODO modify these variables %%%
+\def\homeworknum{2}
+\def\namex{Paridhi Khandelwal}
+\def\namey{Shashwat Shekhar}
+\def\namez{Abdulaziz Alsarrani}
+\def\accessx{pjk5458}
+\def\accessy{svs6603}
+\def\accessz{ana5493}
+%%%%
+
+\pagestyle{fancy}
+\lhead{{\bf CMPSC 465 Fall 2020}}
+\chead{{\bf Writing Assignment~\homeworknum}}
+\rhead{{\bf \today}}
+
+\newcounter{problemid}\stepcounter{problemid}
+\def\newproblem{\vspace*{0.5cm}{\bf Problem~\arabic{problemid}\stepcounter{problemid}}\hfill\fbox{\parbox{0.16\textwidth}{\bf Points:}}\par}
+
+\setlength\parindent{0em}
+\setlength\parskip{8pt}
+\setlength{\fboxsep}{6pt}
+
+
+\begin{document}
+
+\framebox[\textwidth]{
+	\parbox{0.96\textwidth}{
+		\parbox{0.1\textwidth}{\bf Name~1:}\parbox{0.6\textwidth}{\namex}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessx} \\ 
+		\parbox{0.1\textwidth}{\bf Name~2:}\parbox{0.6\textwidth}{\namey}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessy} \\ 
+		\parbox{0.1\textwidth}{\bf Name~3:}\parbox{0.6\textwidth}{\namez}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessz}
+	}
+}
+
+
+%% your solutions %%%
+
+\newproblem
+1. P$_{1}$ \\\\
+2. C$_{1}'$ = (P$_{1}$,P$_{3},$P$_{5},$P$_{9},$P$_{10}$)\\\\
+3. C$_{2a}$ = from C$_{2R}$ to C$_{2L}$ = (P$_{7}$,P$_{8},$P$_{11}$) ;  C$_{2b}$ = (P$_{1}$,P$_{6}$)\\\\
+4. C$_{1}'$ = (P$_{7}$,P$_{8}$,P$_{2}$,P$_{11}$,P$_{4}$,P$_{6}$)\\\\
+5. C$'$ = (P$_{1}$,P$_{3},$P$_{5},$P$_{7},$P$_{8}$,P$_{2},$P$_{9},$P$_{11}$,P$_{4}$,P$_{10}$,P$_{6}$)\\\\
+6. Initialize empty stack: \\
+For P$_{1}$: push P$_{1}$\\
+For P$_{3}$: push P$_{3}$\\
+For P$_{5}$: push P$_{5}$\\
+For P$_{7}$: push P$_{7}$\\
+For P$_{8}$: push P$_{8}$; pop P$_{7}$ \\
+For P$_{2}$: push P$_{2}$\\
+For P$_{9}$: push P$_{9}$; pop P$_{2}$\\
+For P$_{11}$: push P$_{11}$\\
+For P$_{4}$: push P$_{4}$\\
+For P$_{10}$: push P$_{10}$\\
+For P$_{6}$: push P$_{6}$\\
+
+
+\newproblem
+1.POST AND PRE:\\\\\\\\\\\\\\\\\\\\\\\
+Postlist:[ v$_{8}$, v$_{7}$, v$_{1}$, v$_{2}$, v$_{4}$, v$_{6}$, v$_{3}$, v$_{5}$]\\\\\\
+2. Diagram\\\\\\\\\\\\\\\\\\\\\\\
+3. [C$_{3}$, C$_{2}$, C$_{4}$, C$_{1}$ ]\\\\
+4. Two, as we can't start from any point other than C$_{3}$. So the two linearizations are:\\
+a. [C$_{3}$, C$_{4}$, C$_{2}$, C$_{1}$ ]\\
+b. [C$_{3}$, C$_{2}$, C$_{4}$, C$_{1}$ ] \\
+
+\newproblem
+{\bf Explanation: }\\
+For this problem, we will use the idea that a DAG graph which contains multiple source nodes contains many linearizations, since we can start the linearization with either source. To solve this problem, we will use this definition recursively on our graph. So we will implement DFS while removing the source node each time and seeing if this new graph has more than one source. If for any of our recursive calls, the graph contains more than one source, then it can have many linearizations because each of those multiple linearizations on our subgraphs can be used in our main linearization giving it many versions as well. This proves our algorithm is correct, because we used the definition of a lineariszation in correspondence with source indices to create this algorithm.
+
+{\bf Pseudocode: }
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+def containsOneLinearization(G):
+    indegrees = findIndegrees(G)
+    return checkSources(G,indegrees)
+
+def findIndegrees(G):
+    inDegrees = []
+    for all edges, e in G:
+        inDegrees[index of the second point in the edge]+=1
+    return inDegrees
+    
+def checkSources(G, inDegrees):
+    countOfSources = inDegrees.count(0)
+    if(countOfSources > 1)
+    return False
+    else
+        sourceIndex = inDegrees.index(0)
+        for (($v_{sourceIndex}$, $v_j$) in the graph edges)
+            G.remove(($v_{sourceIndex}$, $v_j$))
+        G.remove($v_{sourceIndex}$)
+        inDegrees = [i-1 for i in inDegrees]
+        return checkSources(G, inDegrees)
+    
+\end{Verbatim}
+
+{\bf Explanation: }\\
+So, in this pseudocode. We first go to $containsOneLinearization$ and call the $findIndegrees$ function which loops through all of the edges of the graph and keeps track of the indegrees of each point and returns that array. Then we call $checkSources$ which takes our graph and the array of indegrees and checks how many indegrees are equal to 0, which means the point is a source. If there is more than one source, then that means there is more than one linearization because we can choose to start at either source as explained above. Then, if there is only one source, we go through all of the edges of that source and remove each of them from the graph. Then we remove the source point itself and decrease each indegree by 1. Finally, we call the function recursively with our new subgraph and edited $inDegrees$ array.\\
+\\
+
+{\bf Runtime: }\\
+The runtime of the above algorithm is $O(|V| + |E|)$
+
+\newproblem
+
+1. {\bf Pseudocode: } \\
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+    function DFS(G)
+        num-cc=0
+        parent=0
+        for i=1 to n
+            cycle=False
+            if visited[i]=0
+                num-cc ++;
+                explore(G,$v_{i}$)
+    function explore(G,$v_{i}$)
+        visited[i]=num-cc
+        for each edge($v_{i}$,$v_{j}$)$\in$ E
+            if cycle=TRUE and e=($v_{i}$,$v_{j}$)
+                return True for the entire DFS call
+            if visited[j]=0
+                cycle=False
+                parent=i
+                explore(G,$v_{j}$)
+            else if visited[j]=num-cc and j $\neq$ parent
+                cycle=True
+                explore(G,$v_{j}$)
+    \end{Verbatim}
+
+2. {\br \bf Pseudocode: } \\
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+    function DFS(G)
+        num-cc=0
+        for i=1 to n
+            cycle=False
+            if visited[i]=0
+                num-cc ++;
+                explore(G,$v_{i}$)
+    function explore(G,$v_{i}$)
+        visited[i]=num-cc
+        for each edge($v_{i}$,$v_{j}$)$\in$ E
+            if cycle=TRUE and e=($v_{i}$,$v_{j}$)
+                return True for the entire DFS call
+            if visited[j]=0
+                cycle=False
+                explore(G,$v_{j}$)
+            else if visited[j]=num-cc
+                cycle=True
+                explore(G,$v_{j}$)
+    \end{Verbatim}
+
+
+{\bf Runtime: }\\
+The runtime for both of the above algorithms are $O(|V| + |E|)$
+
+\newproblem
+{\bf Explanation: }\\
+Overall the complexity of Graham scan is $O(nlogn)$, so we can use it. But needs to be modified to find the perimeter.\\
+
+1. Find the point P* with the smallest y coordinate\\
+2. Sort the remaining points in ascending order of the angle they make with respect to p*\\
+3. Rename the points according to the above order\\
+4. We implement the below $GrahamScanCore$ algorithm \\
+
+At the end, return the perimeter, which is the sum of the distance between each adjacent points of the convex hull thus found.
+
+{\bf Pseudocode: }
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+GrahamScanCore(P)\\
+    Init an empty Stack S 
+    Init a variable called perimeter=0\\
+    Push P$_1$ into the stack\\
+    Push P$_2$ into the stack and add distance(P$_1$,P$_2$) to perimeter\\
+    Push P$_3$ into the stack and add distance(P$_2$,P$_3$) to perimeter\\
+    For k=4 to n\\
+         while S is not empty\\
+            Let P$_a$ and P$_b$ be the top stack elements\\
+            Check the orientation of P$_a$ -> P$_b$ -> P$_u$ \\
+            if "turning right": 
+                pop(S)
+                perimeter=dist(P$_b$, P$_a$)
+                perimeter+= dist(P$_b$, P$_k$)
+            if "turning left":
+                break 
+        push P$_k$ into S
+        perimeter+=distance(P$_a$, P$_k$)
+    return perimeter
+\end{Verbatim}
+
+{\bf Runtime: }\\ 
+The runtime for the above algorithm is the same as GrahamScanCore which is $O(nlogn)$
+
+\newproblem
+{\bf Explanation: }\\
+In this problem, we are given that: \\
+    i) There are n trains $(X_1,X_2,...,X_n)$ moving in the same direction on parallel tracks. \\
+    ii) Train $X_k$ moves at constant speed $v_k$, and at time $t = 0$, is at position $s_k$
+
+We will use the concepts of convex hull to solve this problem since we see that our time complexity is $O(nlogn)$. 
+
+We first create a plot with distance as the y axis and time on the x axis. Then, we will create a loop and go from $0$ to $t_2$ and at each instance of time, we will plot the distances of the trains at that instance. Once we do reach $t_2$ we will then find the point with the smallest y-coordinate and then arrange the other points in an array with respect to that lowest y-coordinate, $y*$ and then implement the $GrahamScanCore$ algorithm on those sorted points. \\
+Then, our greatest distances at each point in time will be the top part of the convex hull, also known as, the lower envelope. Thus, the lower envelope will consist of the distances of our awarded trains, so we will find each train associated with the distances and append those trains in our final awarded array.
+
+{\bf Pseudocode: }
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+def AwardedTrainsList(T)\\
+    pointList = []
+    awardedList = []
+    for(int $t_1$=0; $t_1$< t2 ; $t_1$++):
+        for(int j = 0; j < n; j++)
+            pointList.append($V_k$ * $t_1$,$t_1$)
+    lowerEnvelopePoints = lowerEnvelope(GrahamScanCore(pointList));
+    map lowerEnvelopePoints to trains and append the train to awardedList if the train\\
+    is not in the awardedList already
+    return awardedList
+    
+\end{Verbatim}
+
+{\bf Runtime: }\\ 
+The runtime for the above algorithm is the same as GrahamScanCore which is $O(nlogn)$
+
+\newproblem
+{\bf Explanation: }\\
+We will use graph theory to solve this problem. Let us assume that the tasks to be performed, ${T_1, T_2, ....T_n}$ represent the nodes of a graph and the $m$ conditions to be satisfied represent the edges. 
+
+We say that if an edge points from $T_i$ to $T_j$, that represents that the conditions for the task $T_i$ have to be met before performing task $T_j$. Therefore, we can represent a requirement by ($T_i$, $T_j$). 
+
+In order to fulfill the requirement that one task $T_i$ must be done before another task $T_j$ for all the given $n$ tasks, we perform a DFS on the above mentioned graph and sort the tasks in the required order. 
+
+Let's say we use a stack, called $task$ $order$ to store the resultant order of tasks. We start exploring the task which can be completed without any requirements, i.e., with a node that has indegree == 0. Let's implement the pseudo code of the  `TaskOrder` function, given these details
+
+{\bf Pseudocode: }
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+function TaskOrder(G(V,E), $T_i$, taskorder, taskcompleted[n])\\
+    taskcompleted [i] = 1  // mark the task $T_i$ as completed \\
+    for any requirement ($T_i$, $T_j$) belonging to the set of requirements: \\
+        if( taskcompleted [j] == 0): 
+            TaskOrder(G(V,E), $T_j$, taskorder, taskcompleted[n]);  
+        else: 
+            taskorder.push($T_i$) 
+\end{Verbatim} 
+
+The final stack, $taskorder$ will now contain the desired order in which the tasks need to be completed to meet all the requirements.
+
+{\bf Runtime: } \\
+$O(n+m)$ since TaskOrder is equivalent to DFS explore function whose running time is given by $O(|V|+|E|)$
+
+{\bf Assumption: } \\
+Throughout this question, we assume that there is only one connected component; however, in the case that there are multiple, then we also implement the DFS function ($num-cc$) version and start with it but instead of calling $explore(G,v_i)$ we will call $TaskOrder(G(V,E), T_i, taskOrder, taskCompleted)$ and we will initialize the $taskOrder$ stack and $taskCompleted$ array before the for loop in the DFS function.
+
+
+
+\newproblem
+{\bf Explanation: }\\
+For both parts of problem 8, we see that the time complexity is O($|V|+|E|)$ this means that we will be implementing DFS for both parts.
+
+1. So for part 1 of the problem, we will implement the DFS(num-cc version) with the explore function on each $v_i$ which will give us the points that $v_i$ can reach which is from the edge for loop in the $explore$ function as it loops through all of the edges which start from $v_i$. 
+
+Then, for each recursive explore call (so each DFS with a different $v_i$) we will choose the point with the lowest j and append that to our final $functionList$ (which will have all of the $f(v_i)$ values to return at the end of the algorithm) once we end all of the recursive calls for a particular $v_i$ (which means we recursively called and updated the smallest j, until the recursive calls were over). 
+
+This process will also account for a node which is its own connected component since each node can go back to itself then that means there will exist an edge ($v_i, v_i$) which will be accessed in our explore for loop. And will thus return $i$ as the smallest value since it is the only reachable edge.
+
+Thus, we can probably deduce that for each connected component, the smallest $j$ that connected component contains is the f($v_i$) for all values of $i$ within that connected component. 
+
+Finally, we return our $functionList$
+
+2. For part 2, we will implement the same process as part 1, however we will reverse the graph first in order to reverse the $i$ and $j$ values to have them mimic the graph in part 1. Then we will implement the same process we have done in part 1.
+
+{\bf Runtime: } \\
+DFS explore function's running time is given by $O(|V|+|E|)$ for both of the problems
+
+\end{document}
+
+
+
+

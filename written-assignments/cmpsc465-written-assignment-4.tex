@@ -1,0 +1,228 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{geometry}
+\usepackage{pslatex}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{indentfirst}
+\geometry{ margin = 1.0in }
+
+%%% TODO modify these variables %%%
+\def\homeworknum{1}
+\def\namex{Paridhi Khandelwal}
+\def\namey{Shashwat Shekhar}
+\def\namez{Abdulaziz Alsarrani}
+\def\namem{Adhiraj Agarwal}
+\def\accessx{pjk5458}
+\def\accessy{svs6603}
+\def\accessz{ana5493}
+\def\accessm{apa5649}
+%%%%
+
+\pagestyle{fancy}
+\lhead{{\bf CMPSC 465 Fall 2020}}
+\chead{{\bf Writing Assignment~\homeworknum}}
+\rhead{{\bf \today}}
+
+\newcounter{problemid}\stepcounter{problemid}
+\def\newproblem{\vspace*{0.5cm}{\bf Problem~\arabic{problemid}\stepcounter{problemid}}\hfill\fbox{\parbox{0.16\textwidth}{\bf Points:}}\par}
+
+\setlength\parindent{0em}
+\setlength\parskip{8pt}
+\setlength{\fboxsep}{6pt}
+
+
+\begin{document}
+
+\framebox[\textwidth]{
+	\parbox{0.96\textwidth}{
+		\parbox{0.1\textwidth}{\bf Name~1:}\parbox{0.6\textwidth}{\namex}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessx} \\ 
+		\parbox{0.1\textwidth}{\bf Name~2:}\parbox{0.6\textwidth}{\namey}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessy} \\ 
+		\parbox{0.1\textwidth}{\bf Name~3:}\parbox{0.6\textwidth}{\namez}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessz} \\ 
+		\parbox{0.1\textwidth}{\bf Name~4:}\parbox{0.6\textwidth}{\namem}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessm}
+	}
+}
+
+
+%% your solutions %%%
+
+\newproblem
+a.\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+\newproblem
+a.\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+\\
+\newproblem
+{\bf 3.1}  In this question we need a $O(|V|+|E|)$ runtime, therefore the algorithm should traverse the edges and vertices only linear number of times.
+
+The question is focused on checking if a path exists between ${(s, t)}$ which follows the pattern 465465..., therefore a simple DFS can solve this problem, rather than needing to use Djikstra's. 
+
+{\bf Pseudocode:}
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+traversed = [False]*(|V|)
+def checkPath(G(V,E), s, t, firstPattern):
+    traversed[s] = True
+    check = False
+    
+    if(s != 4):
+        return False
+    if firstPattern = 4:
+        nextPattern = 6
+    elif firstPattern = 6:
+        nextPattern = 5
+    elif firstPattern = 5:
+        nextPattern = 4
+    
+    for edges(s,v) in E:
+        if(traversed[v] = False and labelof(v)=nextPattern):
+            if(! checkPath(G(V,E), v, t, firstPattern) == True and ! check)
+                check = False
+            else:
+                check = True
+    return check
+checkPath(G(V,E), s, t, 4)
+
+\end{Verbatim}
+
+{\bf Explanation :}
+    We traverse the given graph G, in a DFS fashion starting with the ${firstPattern}$ as 4 and accordingly assigning the ${nextPattern}$ number. Then for each edge starting with $s$, we check if the label value of the unvisited sink vertex matches the  ${nextPattern}$.
+    
+    If it does, we recursively call the $checkPath$ function again with the starting vertex as the previously found sink vertex, till we are done traversing the complete graph. The boolean variable, $check$, finally returns $True$ if such a path exists otherwise returns $False$. 
+    
+{\bf Runtime :}
+     $O(|V|+|E|)$
+ \\\\\\\\ 
+{\bf 3.2}  In this question we need a $O(|V|+|E|)$ runtime, therefore the algorithm should traverse the edges and vertices only linear number of times.
+
+In order to solve this question, we can utilize the algorithm we have designed in 3.1. However, we will first need to edit the graph in order to be able to use the algorithm. The graph in this question has the labels on the edges instead of the vertices. Thus, we will need to map those edges to vertices in a new graph. The vertices for the new graph will be in the form $(u,v, label)$ for each $(u,v)$ edge from the original graph. 
+
+Now, since the mapped graph has the labels on the vertices, we can use the same algorithm as above and modify it slightly to accommodate for the new vertex form. For example, we do so by checking for the label part of the tuple instead of s in the mapped graph.
+
+Thus, by doing so, if the algorithm from 3.1 returns true for the mapped graph, that means there is a path from s to t that satisfies the conditions from 3.1. And, since that is the case it must mean that the path included something like this (u, $v_0$) then ($v_0$, $v_1$) because each vertex represents an edge which means that the tail of one edge is the head of another within the path. Thus, there exists a walk in the graph. 
+
+And, since we looped through each vertex and edge once, then the running time of this algorithm is $O(|V|+|E|)$
+
+
+\newproblem
+The problem can be solved using Bellman-Ford Algorithm (with slight modifications) since it includes edges with negative edge length. 
+
+
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+Given: distance a(u,v) means length of the shortest path from u to v that goes through vertex a
+initialize a 2D array dist of size |V|
+dist from s to s =0
+dist from everything else to everything is $\infty$ in V
+distancesFromA = return value of modified Bellman Ford on A
+for each (u,v):
+    distCalculated = the distance from u to A from the return value of the modified Bellman ford
+    
+    set the distance slot for u,v in the array to be equal to the sum of calculated distances
+    
+    if one of the distances is infinity, then store infinity in the corresponding array slot
+
+then we return the value of the dist array
+\end{Verbatim}
+
+To solve this question, we are firstly given a fixed a value and are asked to find the shortest path between each edge (u,v) in the graph which passes through the point a. Thus, we would first start off by using the Bellman ford algorithm, with modification to remove the check for negative edge cycles since they are not included, for a. Then we find the shortest distance from each point u to a using the modified bellman ford algorithm. Finally, we add the distances from u to a and from a to v for each (u,v) and return the array of those values. If at any step, there is no path from u to a or from a to v, then in the addition step, we set the value equal to infinity in the final returned array.
+
+
+\newproblem
+
+{\bf Algorithm: }
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+start Algorithm Dijkstra (G=(V,E), l(e) $\forall$ e $\in$ E, w(v) $\forall$ v $\in$ V)
+dist[v]= $\infty$ ($\forall$ v $\in$ V)
+for v $\in$ V: insert(PQ,v,$\infty$)
+dist[s]=0 (since w(s)=0)
+decrease-key(PQ,s,0)
+while(empty (PQ) = false):
+    v^* k+1 = find-min(PQ)
+    delete-min(PQ)
+    for (v^* k+1,v) $\in$ E:
+        if(dist[v]> dist[v^* k+1] + l(v^* k+1,v) + w(v)):
+            dist[v] = dist[v^* k+1] + l(v^* k+1,v) + w(v)
+            decrease-key(PQ,v,dist[v])
+        end if
+    end for
+end while
+end Algorithm
+
+\end{Verbatim}
+$\bf Proof:$\\
+We take a graph G with weighted edges and weighted vertices and split the vertices with weights not equal to 0 into two and connect those vertices with an edge of length equal to the weight of the vertex. Let's call it G'. 
+
+Then we run the Djikstra's algorithm on the G'. The output of this Dijkstra's algorithm run will return a distance array, say dist[]. Now we do the following:
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+temp = []
+for i in range (2, 2|V|, 2):
+    temp.append(dist[i])
+\end{Verbatim}
+
+The runtime is now based on $|V|new = 2|V|-1 $ and $|E|new = |V|+|E|-1$ This new run time is still in the form $O(|V|log(|V|) + |E|(log(|V|))$\\
+
+{\bf The temp[] is the same array as the dist[] we get on running above mentioned slightly modified Djikstra's . Therefore, our algorithm of just adding the weight into the distance is proved}
+
+\newproblem
+Due to the given required running time for this question, we can use the complete DP algorithm from lecture 20. 
+
+
+However, we will need to add one more if statement to determine if there are multiple shortest paths.
+
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+start Algorithm Dijkstra (G=(V,E), l(e) $\forall$ e $\in$ E, w(v) $\forall$ v $\in$ V)
+dist[v]= $\infty$ ($\forall$ v $\in$ V)
+for v $\in$ V: insert(PQ,v,$\infty$)
+dist[s]=0 (since w(s)=0)
+decrease-key(PQ,s,0)
+while(empty (PQ) = false):
+    v^* k+1 = find-min(PQ)
+    delete-min(PQ)
+    for (v^* k+1,v) $\in$ E:
+        if(dist[v]> dist[v^* k+1] + l(v^* k+1,v) + w(v)):
+            dist[v] = dist[v^* k+1] + l(v^* k+1,v) + w(v)
+            decrease-key(PQ,v,dist[v])
+        end if
+        if(dist(k-1,u) + l(u,v) == dist(k,v)):
+            multiple[v]= 1
+        end if
+    end for
+end while
+end Algorithm
+
+\end{Verbatim}
+
+If the equality condition is met, then there are multiple shortest paths.
+
+\newproblem
+{\bf To solve this question, we can identify some properties given in the question:} \\\\
+1. Probabilities are independent over all the edges therefore, we need to maximize the product of probabilities of all the edges in E. \\
+2. Probability cannot be negative therefore there are no negative edge values, so we can use Dijkstra's \\
+3. The run time of Dijkstra's matches what's expected in the question. Therefore, we just have  to convert this problem into a shortest summation problem. 
+
+{\bf Some facts we know:} \\\\
+1) We know from basic probability that if the probabilities are independent then we need to maximize $\prod_{(u,v) in E} r(u,v)$
+
+
+2) Since $0 <r(u,v)<1$ is always positive,  it's safe to say that maximizing $\prod_{(u,v) in E} r(u,v)$ is equivalent to maximizing $log( \prod_{(u,v) in E} r(u,v))$.This is valid since  $\prod_{(u,v) in E} r(u,v))$ is always greater than 0 and hence satisfies log properties. 
+
+3) $log( \prod_{(u,v) in E} r(u,v))$  = $\sum_{(u,v) in E)} log(r(u,v))$
+
+4) From algebra and calculus, we know that maximizing $f(x)$ is equivalent to minimizing $g(x) = -f(x)$
+
+5) Therefore we will minimize $\sum_{(u,v) in E)} -log(r(u,v))$
+
+6) We finally run the normal Dijkstra's with length of edge replaced by $ -log(r(u,v))$, which is the modified reliability. 
+
+7) That gives us the shortest path which in turn is our path of maximum reliability. We get the maximum $\prod_{(u,v) in E} r(u,v)$
+
+{\bf Example proof for point 4) above:}\\
+$f(x) = -4x^2 -2x => f'(x) = 0 => -8x-2 > 0$ \\
+$=> f"(x) = -8 => x=-1/4$ \\
+which is the maxima
+
+$f(x) = 4x^2 +2x => f'(x)=8x+2 = 0 => x=-1/4$ \\
+$f"(x) = 8 >0$ \\
+which is the minima
+\end{document}

@@ -1,0 +1,324 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{geometry}
+\usepackage{pslatex}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tabto}
+\geometry{ margin = 1.0in }
+
+%%% TODO modify these variables %%%
+\def\homeworknum{1}
+\def\namex{Paridhi Khandelwal}
+\def\namey{Abdulaziz Alsarrani} 
+\def\namez{Shashwat Shekhar}
+\def\accessx{pjk5458}
+\def\accessy{ana5493}
+\def\accessz{svs6603}
+%%%%
+
+\pagestyle{fancy}
+\lhead{{\bf CMPSC 465 Fall 2020}}
+\chead{{\bf Writing Assignment~\homeworknum}}
+\rhead{{\bf \today}}
+
+\newcounter{problemid}\stepcounter{problemid}
+\def\newproblem{\vspace*{0.5cm}{\bf Problem~\arabic{problemid}\stepcounter{problemid}}\hfill\fbox{\parbox{0.16\textwidth}{\bf Points:}}\par}
+
+\setlength\parindent{0em}
+\setlength\parskip{8pt}
+\setlength{\fboxsep}{6pt}
+
+
+\begin{document}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+\framebox[\textwidth]{
+	\parbox{0.96\textwidth}{
+		\parbox{0.1\textwidth}{\bf Name~1:}\parbox{0.6\textwidth}{\namex}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessx} \\ 
+		\parbox{0.1\textwidth}{\bf Name~2:}\parbox{0.6\textwidth}{\namey}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessy} \\ 
+		\parbox{0.1\textwidth}{\bf Name~3:}\parbox{0.6\textwidth}{\namez}\parbox{0.12\textwidth}{\bf Access ID:}\parbox{0.14\textwidth}{\accessz}
+	}
+}
+
+
+%% your solutions %%%
+\newproblem
+1. $\smallskip$
+$f=\Omega(g)$ \\
+2. $\smallskip$
+$f=\Omega(g)$\\
+3. $\smallskip$
+$f=$O$(g)$\\
+4. $\smallskip$
+$f=\Omega(g)$\\
+5. $\smallskip$
+$f=\Omega(g)$\\
+6. $\smallskip$
+$f=\Omega(g)$\\
+7. $\smallskip$
+$f=\Theta(g)$\\
+8. $\smallskip$
+$f=$O$(g)$\\
+9. $\smallskip$
+$f=$O$(g)$\\
+10. $\smallskip$ 
+$f=\Omega(g)$\\
+11. $\smallskip$
+$f=\Omega(g)$\\
+12. $\smallskip$
+$f=\Theta(g)$\\
+13. $\smallskip$
+$f=\Theta(g)$\\
+14. $\smallskip$
+$f=$O$(g)$\\
+15. $\smallskip$
+$f=$O$(g)$
+
+
+\newproblem
+\smallskip
+
+According to the Master's Theorem we know, 
+
+\begin{equation}
+	T(n)=
+	  \begin{cases}
+		\Theta (n^d)\cdot log(n)& {d=log_b a}\\
+		\Theta (n^{\log_b a} ) &{d<log_b a}\\
+		\Theta (n^d)&{d>log_b a}
+	  \end{cases}  
+\end{equation}\\
+1. $\smallskip$$\Theta(n^4)$\\
+2. $\smallskip$$\Theta(n^2 log(n))$\\
+3. $\smallskip$$\Theta(n^{3.5})$\\
+4. $\smallskip$$\Theta(n \cdot log^2(n))$\\
+5. $\smallskip$$\Theta(n^{3})$
+\\\\\\\\\\\\\\
+\newproblem
+
+1. \textbf{False} 
+
+We will prove that the statement is false by giving a counter example.
+
+\textbf{Proof:}\\
+If we assume $f(n)=4$ and $g(n)=1$ then these two functions satisfy $f(n)=$O$(g(n))$ for any $c\geq4$.
+
+But if we use the same example to verify $ln(f(n))=$O$(ln(g(n)))$, then, $ln(g(n))=ln(1)=0$. Therefore, for all values of $c>0$, $ln(f(n)) > c(ln(g(n))$ also holds true for the given example. \tab{$\square$}\\
+
+
+2. \textbf{False}
+
+We will prove that the statement is false by giving a counter example.
+
+\textbf{Proof:}\\
+If we assume $f(n)=4n$ and $g(n)=3n$ then these two functions satisfy $f(n)=$O$(g(n))$ for $c\geq2$.
+
+But if we use the same example to verify $2^{(f(n))}=$O$(2^{(g(n))})}$, then the relation becomes,\\ $2^{4n} \leq c \cdot 2^{3n}$ = $16^n \leq c \cdot 8^n$
+
+Let's say $c=3$ and $n=2$. This satisfies  $f(n)=$O$(g(n))$ but doesn't satisfy  $16^2 \leq 3 \cdot 8^2$. Therefore, there are at least some values  of $n$ and $c$ which don't satisfy the given argument and hence the given statement is false. \tab{$\square$}\\
+
+
+3. \textbf{True}
+
+\textbf{Proof by induction:}
+
+We need to find an ${n_{0}}$ and c such that for all $n$ \geq ${n_{0}}$, $f(n)^2\leq $c$(g(n)^2)$ holds true, given $f(n)=$O$(g(n))$ holds true.
+
+\textbf{Base Case}:
+$n=1$\\
+We know $f(1) \leq c \cdot g(n)$, by the definition of Big-Oh notation.\\
+Therefore, by the law of squares, $f(1)^2\leq c \cdot g(1)^2$ holds true as well.
+
+\textbf{Inductive Hypothesis}:\\
+Let's assume our proposition holds true for some $n=k$, $k \geq 0$. Therefore, $f(k)^2\leq c \cdot g(k)^2$ holds true.
+
+\textbf{Inductive Step}:\\
+We will now prove that our hypothesis holds true for $n=k+1$, $k \geq 0$ by showing $f(k+1)^2\leq c \cdot g(k+1)^2$ 
+
+Let $k+1=m$, where $m\geq 0$ is a constant. Since we know from our inductive hypothesis that $f(k)^2\leq c \cdot g(k)^2$ holds true for  $k \geq 0$.Therefore, $f(m)^2\leq c \cdot g(m)^2$ also holds true for  all $m \geq 0$ or all $k+1 \geq 0$.
+
+Therefore, this statement holds true for all $n=k+1$, $k \geq 0$ as well.\\ 
+Hence proved. \tab{$\square$}\\
+
+\newproblem
+$\smallskip$
+1. \textbf{Proof: }\\
+Given, $T(n)= \Theta(n) + T(b) \cdot n$\\
+$a+b<1$\\
+So let $a= \frac{1}{4}$ and $b =\frac{1}{4}$($\frac{1}{4}+\frac{1}{4}<1$),\\
+$T(n)=\Theta(n)+T(\frac{n}{4})+T(\frac{n}{4})=\Theta(n)+2\cdot T(\frac{n}{4})$\\
+$\smallskip$
+That means $a=2, b=4$,
+
+So, by using the \textbf{Master's Theorem} as: \\
+$log_4 2< 1$ $(d=1)$\\
+$T(n)=\Theta(n)$
+
+
+
+Hence proved. \tab{$\square$}
+\\\\
+$\smallskip$
+2. \textbf{Proof: }\\
+Given, $T(n)= \Theta(n) + T(b) \cdot n$\\
+$a+b=1$\\
+So let $a= \frac{1}{2}$ and $b =\frac{1}{2}$($\frac{1}{2}+\frac{1}{2}=1$),\\
+$T(n)=\Theta(n)+T(\frac{n}{2})+T(\frac{n}{2})=\Theta(n)+2\cdot T(\frac{n}{2})$\\
+That means $a=2, b=2$,\\
+So, by using the \textbf{Master's Theorem} as: \\
+$log_2 2 = 1$ $(d=1)$\\
+$T(n)=\Theta(nlog(n))$\\
+Hence proved. \tab{$\square$}
+
+
+
+\\\\\\\\
+
+\newproblem
+
+1.\enspace As the for loop of the function starts at 1 and ends at $n$, it runs $n$ times.\\
+For each of those $n$ times, the while loop runs $\frac{n}{5}-\frac{i}{5}$ times because every interval of 5, the while loop doesn't execute which is why we subtracted $\frac{i}{5}$.\\$\smallskip$
+So,$\displaystyle\sum_{i=1}^{n} \frac{n-i}{5} = \frac{n-1}{5}+ \frac{n-2}{5}+....+\frac{1}{5}$\\$\smallskip$
+=$\displaystyle\frac{n^2}{5}-\frac{1+2+3+....+n}{5}=\frac{n^2}{5}-\frac{(n^2+n)}{10}=
+\frac{n^2-n}{10}.$$\smallskip$\\
+\textbf{ So this means the pseudo-code is $\Theta(n^2)$\\}
+
+
+2.\enspace As the outer for loop of the function starts from 1 and ends at $n$,
+ it executes $n$ times. And for each of those $n$ times, $j$ goes from 4$i$ to $n$,
+ this means that the inner loop executes $n-4i$ times. \\
+So,$\displaystyle\sum_{i=1}^{n} n-4i = n-4+ n-8+....$\\$\smallskip$
+=\enspace$\displaystyle{n^2}-2n^2-2n=-n^2-2n$$\smallskip$\\
+\textbf{So this means the pseudo-code is $\Theta(n^2)$\\}
+
+3.\enspace The for outer loop of the function starts from 1 and ends at $n$,
+but it'll execute the while loop $n^\frac{1}{5}$ times. This is because the while loop does not execute after $i^5$ becomes equal to $n$. And for each of those $n^\frac{1}{5}$ times the while loop executes for $n-i^5$ times.\\
+So,$\displaystyle\sum_{i=1}^{n^\frac{1}{5}} n-i^5 = n-1+ n-32+.... (n^\frac{1}{5})$ terms\\$\smallskip$
+=\enspace$\displaystyle{n}\cdot n^\frac{1}{5}+$ a constant$\smallskip$\\
+=\enspace$\displaystyle n^\frac{6}{5}$\\
+\textbf{So this means the pseudo-code is $\Theta(n^\frac{6}{5})$\\}
+
+4.\enspace In this case, the outer for loop is running $n$ times but only enters the inner while loop for $n-2$ times, as it won't enter for $n=1$ and $n=2$.
+Now, in the while loop we are changing the value of $j$ in each iteration, by an exponential factor of 4 and therefore the asymptotic running time for the inner loop will be of the order $\Theta(log(log(n)))$
+
+Hence, the outer loop runs $n$ times and the inner loop runs with the asymptotic time complexity of $\Theta(log(log(n)))$. 
+
+\textbf{Therefore, the overall asymptotic running time for the given pseudocode will be $\Theta(nlog(log(n)))$}
+\\\\\
+
+\newproblem
+\textbf{Algorithm: }
+
+function Power($x$, $n$)$:$ 
+
+\enspace \enspace if $n == 0$ 
+
+\enspace \enspace \enspace return $1$ 
+
+\enspace \enspace value = Power($x$, $n$//$2$)
+
+\enspace \enspace finalAnswer = value$\cdot$ value 
+
+\enspace \enspace if $n\%2 == 1$ 
+
+\enspace \enspace \enspace finalAnswer = finalAnswer $\cdot x$ 
+
+\\\\
+\textbf{Explanation: }
+
+Since divide and conquer algorithms must be recursive, we have implemented a function Power as shown above in order to meet the required run time of O(log(n))
+
+Case i)$:$ If $n = 0$ then we do not need to calculate any values as $x^n$ will just be equal to $1$\\
+Case ii)$:$ If $n != 0 $, then, we call the function recursively and divide the exponent by 2 each time since we want our run time to be O$(log(n))$. We also floor each time we divide to prevent getting decimal exponents. \\
+Finally, we also have a case to check and see if our original n value was odd because during our recursion we floored each time so if $n$ was odd that means we still need to multiply by x one more time.\\	
+
+\newproblem
+\textbf{Algorithm: }
+
+
+function Median($A$, $B$)$:$
+
+\enspace   $begin$ = 0
+
+\enspace  $end$ = m $//$length of A
+
+\enspace while $begin$ $<=$ $end$:$
+
+\enspace \enspace $partionindexA = begin+end / 2 $
+
+\enspace\enspace  $partitionindexB = (begin+end+1)/ 2 - partitionindexA$
+
+\enspace if $maxLeftA<=minRightB$ and  $maxLeftB<=minRightA$ $:$
+
+\enspace \enspace return $median$
+
+\enspace elif $maxLeftA<minRightB$ $:$
+
+\enspace\enspace  $end = partitionA += 1$
+
+\enspace else$:$
+
+\enspace \enspace $begin = partitionA =- 1$
+
+\enspace 
+
+\textbf{Explanation: }
+
+\textbf{Step I: } In order to calculate the median of two sorted  arrays, we first try to partition the two arrays such that the combined number of elements on the left side is equal to the combined number of elements on the right side. 
+
+Let's say array A has 6 elements $a_{1}$, $a_{2}$, $a_{3}$, $a_{4}$, $a_{5}$, $a_{6}$ and array B has 8 elements $b_{1}$,$b_{2}$,$b_{3}$,$b_{4}$,$b_{5}$,$b_{6}$,$b_{7}$,$b_{8}$
+Now, let's part $a_{1}$, $a_{2}$ and $b_{1}$,$b_{2}$...$b_{5}$ such that the left side has total 2+5=7 elements. Therefore, the right side will also have 7 elements since total elements from both arrays are 6+8=14. 
+
+\textbf{Step II: } In order to correctly find the median,  we make sure all the elements in the left half are less than all the elements in the right half. This is only true when $a_{2}$ $<=$ $b_{6}$ and $b_{5}$ $<=$ $a_{3}$. Once this condition is met, we move on to the third step.
+
+\textbf{Finding the partition:}
+
+We will do a binary search for this. The constraints for the algorithms will the parition index of X + partition index of Y = ((length of A) + (length of B) +1) / 2 to make sure such that the combined number of elements on the left side is equal to the combined number of elements on the right side. 
+Now, let's explain the algorithm basedon the above mentioned partition. 
+
+Case i)$:$ We first check if maxLeftA$<=$minRightB and maxLeftB$<=$minRightA. This means, the if the maximum element from A in the left partition is less than or equal to the minimum element from B in the right partition AND the maximum element from B in the left partition is less than or equal to the minimum element from A in the right partition, then the ideal partition has been found. 
+
+Case ii)$:$ If not, then we check if maxLeftA$<$minRightB. If this holds true then, our partition is still too much towards left and we need to move further right in A for the ideal partition value and we increment the partition index by 1 and repeat the process.
+
+Case iii)$:$ Else, we know maxLeftA$>$minRightB holds true and we need to move further left in A for the ideal partition value and we decrement the partition index by 1 and repeat the process.
+
+\textbf{Step III: } Once we find the partition correctly through the algorithm described above, the median value will be average of max($a_{partition index}$,$b_{((len(A)+len(B))/2)-partitionindex}$) + min($a_{partition index+1}$,$b_{(len(B)((len(A)+len(B))/2)-partitionindex}$) if total elements are odd. 
+
+If total elements are even, it will be max($a_{partitionindex}$,$b_{((len(A)+len(B))/2)-partitionindex}$)
+
+
+\newproblem
+
+\textbf{Algorithm: }
+
+function closestPoints($P$, $k$)$:$
+
+\enspace distanceArray $=[]$
+
+\enspace \enspace for $count = 0; count < len(P); count++$: 
+
+\enspace \enspace \enspace distance $= [(x_{count})^2 + (y_{count})^2)]^\frac{1}{2}$ 
+
+\enspace \enspace \enspace distanceArray.append(distance) 
+
+\enspace \enspace finalArray $= []$
+
+\enspace \enspace for $i = 0; i < k; i++$: 
+
+\enspace \enspace \enspace finalArray.append($P[$indexOf(finalArray.min())$]$)
+
+\enspace \enspace return finalArray 
+\\\\
+\textbf{Explanation: }
+
+Here, we create a new array to hold all of the distances, then we loop through the array which is $n$ times\\
+and calculate the distance between each point and the origin and append them to the distanceArray.\\
+Then, we create another array, $finalArray$, to hold our $k$ closest points. \\
+
+So we loop $k$ times and retrieve the index of the minimum value each time, and since the indices are the \\
+same for both the distance array and the point array, we add the point at our retrieved index, to the finalArray which contains our $k$ final values. And finally, we return the completed finalArray. Thus, our time complexity is $n$ for the first for loop, then it is $kn$ for the second. So O$(kn +n )$ can be simplified to O$(n)$ since $kn$ is greater and $k$ is a constant.
+
+\end{document}
